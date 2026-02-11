@@ -3,7 +3,10 @@ import { geistSans } from "@/components/ui/fonts";
 import "@/components/ui/globals.css";
 
 export const metadata: Metadata = {
-  title: "%s | DYNE",
+  title: {
+    template: "%s | DYNE",
+    default: "DYNE",
+  },
   description: "Social network & chat platform",
 };
 
