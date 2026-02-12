@@ -41,26 +41,25 @@ export default function Page() {
     };
 
     return (
-        <div className="flex justify-center flex-col items-center m-50">
-
-            <h1 className="text-2xl font-bold mb-4 p-5">Create a New Post</h1>
+        <div className="flex flex-col items-center mt-30">
+            <h1 className="text-5xl font-bold mb-4 p-5">Create a New Post</h1>
             <input 
             type="text" 
             placeholder="Author"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            className="px-4 py-2 border border-gray-300 mb-4 rounded-md focus:shadow-xl focus:shadow-gray-600 transition-shadow duration-500"
+            className="w-full max-w-86 px-4 py-2 border border-gray-300 mb-4 rounded-md focus:shadow-xl focus:shadow-gray-600 transition-shadow duration-500"
             />
             <textarea 
             rows={5}
             placeholder="What do you want to say?"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            className="px-4 py-2 border border-gray-300 mb-4 rounded-md focus:shadow-xl focus:shadow-gray-600 transition-shadow duration-500"
+            className="w-full max-w-86 px-4 py-2 border border-gray-300 mb-4 rounded-md focus:shadow-xl focus:shadow-gray-600 transition-shadow duration-500"
             />
             <button 
             onClick={handleSubmit}
-            className="px-4 py-2 w-full max-w-44 bg-gray-500 hover:bg-gray-400 transition-colors duration-300 text-white hover:text-black rounded-md"
+            className="px-4 py-2 w-full max-w-86 h-12 bg-gray-500 hover:bg-gray-400 transition-colors duration-300 text-xl text-white hover:text-black rounded-md"
             >
                 Send
             </button>
