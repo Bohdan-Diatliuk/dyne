@@ -8,5 +8,22 @@ export const authConfig: AuthOptions ={
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
         })
-    ]
+    ],
+    callbacks: {
+        async session({session, token}) {
+            if (session.user) {
+                session.user.id = token.sub!;
+            }
+            return session;
+        },
+        async redirect({ url, baseUrl }) {
+            if (url.startsWith(baseUrl)) {
+                return url;
+            }
+            return `${baseUrl}/feed`;
+        }
+    },
+    pages: {
+        signIn: "/",
+    }
 } 

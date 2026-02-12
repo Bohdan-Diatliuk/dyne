@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import { geistSans } from "@/components/ui/fonts";
+import { oswald } from "@/components/ui/fonts";
 import "@/components/ui/globals.css";
+import { Toaster } from "sonner";
+import NextAuthProvider from "@/components/providers/SessionProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -8,6 +10,9 @@ export const metadata: Metadata = {
     default: "DYNE",
   },
   description: "Social network & chat platform",
+  icons: {
+    icon: "/dyne-icon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -18,9 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.className} antialiased`}
+        className={`${oswald.className} antialiased`}
       >
-        {children}
+        <NextAuthProvider>
+          {children}
+        </NextAuthProvider>
+        <Toaster position="top-center" theme="dark" />
       </body>
     </html>
   );

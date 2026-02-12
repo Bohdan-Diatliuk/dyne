@@ -1,3 +1,5 @@
+import MainEffect from "@/components/effects/mainEffect";
+import Sidebar from "@/components/SideBar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,8 +10,12 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <main>
-            {children}
-        </main>
+        <div className="flex min-h-screen">
+              <Sidebar />
+                <main className="flex-1 p-4">
+                  {children}
+                </main>
+                <MainEffect words={['post']} />
+            </div>
     )
 }
