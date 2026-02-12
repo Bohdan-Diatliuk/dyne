@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { geistSans } from "@/components/ui/fonts";
+import { geistSans, oswald } from "@/components/ui/fonts";
 import "@/components/ui/globals.css";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: {
@@ -18,10 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.className} antialiased`}
+        className={`${oswald.className} antialiased`}
       >
         {children}
       </body>
+      <Toaster position="top-center" theme="dark" />
     </html>
   );
 }
