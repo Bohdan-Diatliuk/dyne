@@ -22,8 +22,8 @@ export default function RootLayout({
         className={`${oswald.className} antialiased`}
       >
         {children}
+        <Toaster position="top-center" theme="dark" />
       </body>
-      <Toaster position="top-center" theme="dark" />
     </html>
   );
 }
