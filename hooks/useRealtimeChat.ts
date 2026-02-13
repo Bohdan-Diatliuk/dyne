@@ -74,7 +74,7 @@ export function useRealtimeChat() {
             .single()
 
           const newMessage: Message = {
-            ...(payload.new as any),
+            ...(payload.new as Omit<Message, 'users'>),
             users: userData,
           }
 
