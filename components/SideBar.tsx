@@ -6,7 +6,7 @@ import { HomeIcon, Users, UserPenIcon, UserSearchIcon, UserRound, UserRoundCog }
 
 const menuItems = [
     { icon: HomeIcon, label: 'Home', href: '/feed' },
-    { icon: Users, label: 'Messages', href: '/messages' },
+    { icon: Users, label: 'Messages', href: '/chat' },
     { icon: UserPenIcon, label: 'Create', href: '/post/new' },
     { icon: UserSearchIcon, label: 'Search', href: '/search' },
     { icon: UserRound, label: 'Profile', href: '/profile' },
