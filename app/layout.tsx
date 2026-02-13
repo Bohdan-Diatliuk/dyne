@@ -3,6 +3,7 @@ import { oswald } from "@/components/ui/fonts";
 import "@/components/ui/globals.css";
 import { Toaster } from "sonner";
 import NextAuthProvider from "@/components/providers/SessionProvider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   title: {
@@ -29,6 +30,7 @@ export default function RootLayout({
           {children}
         </NextAuthProvider>
         <Toaster position="top-center" theme="dark" />
+        <SpeedInsights />
       </body>
     </html>
   );
