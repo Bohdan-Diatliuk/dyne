@@ -2,7 +2,6 @@ import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 export const authConfig: AuthOptions = {
-    // Без адаптера - використовуємо JWT
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
