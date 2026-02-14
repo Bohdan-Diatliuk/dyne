@@ -18,7 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
       <div className="flex min-h-screen">
         <Sidebar />
-        <main className="flex-1 p-4">
+        <main className="flex-1">
           {children}
         </main>
         <MainEffect words={['lol', 'lmo', 'EPSTEIN']} zIndex={-1} />
