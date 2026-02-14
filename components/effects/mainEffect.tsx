@@ -5,7 +5,7 @@ import { loadSlim } from "@tsparticles/slim";
 import { loadTextShape } from "@tsparticles/shape-text";
 import type { Container } from "@tsparticles/engine";
 import { useEffect, useState, useCallback } from "react";
-import { ParticleEffectProps } from "../../types/particles";
+import { ParticleEffectProps } from "../../types/particles.interface";
 
 export default function MainEffect({
   color = "#fff",
