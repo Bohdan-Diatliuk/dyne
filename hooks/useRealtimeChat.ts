@@ -15,39 +15,74 @@ export function useRealtimeChat() {
   const loadMessages = useCallback(async () => {
     setLoading(true)
     try {
-      const { data, error } = await supabase
+      const { data: messagesData, error: messagesError } = await supabase
         .from('messages')
         .select(`
           *,
           users (
             name,
             avatar_url
-          ),
-          reply_to:messages!reply_to_id (
-            id,
-            content,
-            users (
-              name,
-              avatar_url
-            )
           )
         `)
         .order('created_at', { ascending: true })
         .limit(100)
 
-      if (error) {
-        console.error('Error loading messages:', error)
-      } else if (data) {
-        const normalizedMessages = data.map((msg: any) => ({
-          ...msg,
-          users: Array.isArray(msg.users) ? msg.users[0] : msg.users,
-          reply_to: msg.reply_to ? {
-            ...msg.reply_to,
-            users: Array.isArray(msg.reply_to.users) ? msg.reply_to.users[0] : msg.reply_to.users
-          } : null
-        }))
-        setMessages(normalizedMessages)
+      if (messagesError) {
+        console.error('Error loading messages:', messagesError)
+        setLoading(false)
+        return
       }
+
+      if (!messagesData) {
+        setMessages([])
+        setLoading(false)
+        return
+      }
+
+      console.log('Messages loaded:', messagesData)
+
+      const messagesWithReplies = await Promise.all(
+        messagesData.map(async (msg: any) => {
+          let replyTo = null
+
+          if (msg.reply_to_id) {
+            console.log('Loading reply for message:', msg.id, 'reply_to_id:', msg.reply_to_id)
+            
+            const { data: replyData, error: replyError } = await supabase
+              .from('messages')
+              .select(`
+                id,
+                content,
+                users (
+                  name,
+                  avatar_url
+                )
+              `)
+              .eq('id', msg.reply_to_id)
+              .maybeSingle()
+
+            if (replyError) {
+              console.error('Error loading reply:', replyError)
+            } else if (replyData) {
+              console.log('Reply data loaded:', replyData)
+              replyTo = {
+                id: replyData.id,
+                content: replyData.content,
+                users: Array.isArray(replyData.users) ? replyData.users[0] : replyData.users
+              }
+            }
+          }
+
+          return {
+            ...msg,
+            users: Array.isArray(msg.users) ? msg.users[0] : msg.users,
+            reply_to: replyTo
+          }
+        })
+      )
+
+      console.log('Final messages with replies:', messagesWithReplies)
+      setMessages(messagesWithReplies)
     } catch (error) {
       console.error('Error loading messages:', error)
     } finally {
@@ -80,6 +115,8 @@ export function useRealtimeChat() {
 
           let replyToData: ReplyToMessage | null = null
           if (payload.new.reply_to_id) {
+            console.log('Fetching reply_to message for:', payload.new.reply_to_id)
+            
             const { data: replyMessage } = await supabase
               .from('messages')
               .select(`
@@ -91,7 +128,9 @@ export function useRealtimeChat() {
                 )
               `)
               .eq('id', payload.new.reply_to_id)
-              .single()
+              .maybeSingle()
+            
+            console.log('Reply message data:', replyMessage)
             
             if (replyMessage) {
               replyToData = {
@@ -99,6 +138,7 @@ export function useRealtimeChat() {
                 content: replyMessage.content,
                 users: Array.isArray(replyMessage.users) ? replyMessage.users[0] : replyMessage.users
               }
+              console.log('Normalized reply data:', replyToData)
             }
           }
 
@@ -108,6 +148,7 @@ export function useRealtimeChat() {
             reply_to: replyToData,
           }
 
+          console.log('Final new message:', newMessage)
           setMessages((current) => [...current, newMessage])
         }
       )
@@ -129,14 +170,19 @@ export function useRealtimeChat() {
       return { error: 'Not authenticated' }
     }
 
+    console.log('Sending message with reply_to_id:', replyToId)
+
     try {
-      const { error } = await supabase
+      const { error, data } = await supabase
         .from('messages')
         .insert({
           user_id: session.user.email,
           content: content.trim(),
           reply_to_id: replyToId || null,
         })
+        .select()
+
+      console.log('Insert result:', { data, error })
 
       if (error) {
         console.error('Error sending message:', error)

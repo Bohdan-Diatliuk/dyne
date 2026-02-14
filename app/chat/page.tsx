@@ -149,10 +149,10 @@ export default function Page() {
                       
                       {message.reply_to && (
                         <div className={`text-xs mb-2 pb-2 border-l-2 pl-2 ${
-                          isOwn ? 'border-gray-600 opacity-70' : 'border-gray-400 opacity-60'
-                        }`}>
+                            isOwn ? 'border-gray-600 opacity-70' : 'border-gray-400 opacity-60'
+                          }`}>
                           <div className="font-semibold">
-                            {message.reply_to.users?.name || 'Невідомий'}
+                            Відповідь на: {message.reply_to.users?.name || 'Невідомий'}
                           </div>
                           <div className="truncate">
                             {message.reply_to.content}
