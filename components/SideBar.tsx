@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { HomeIcon, Users, UserPenIcon, UserSearchIcon, UserRound, UserRoundCog } from 'lucide-react'
+import { HomeIcon, Users, UserPenIcon, UserSearchIcon, UserRound, UserRoundCog, MessageCircleMore } from 'lucide-react'
 
 const menuItems = [
     { icon: HomeIcon, label: 'Home', href: '/feed' },
-    { icon: Users, label: 'Messages', href: '/chat' },
+    { icon: MessageCircleMore, label: 'Chat', href: '/chat' },
+    { icon: Users, label: 'Messages', href: '/messages' },
     { icon: UserPenIcon, label: 'Create', href: '/post/new' },
     { icon: UserSearchIcon, label: 'Search', href: '/search' },
     { icon: UserRound, label: 'Profile', href: '/profile' },
@@ -17,7 +18,6 @@ export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <>
         <div className="h-screen py-5 px-4 mx-0 sticky top-0" 
             onMouseEnter={() => setIsOpen(true)}
             onMouseLeave={() => setIsOpen(false)}
@@ -44,6 +44,5 @@ export default function Sidebar() {
                 })}
             </nav>
         </div>
-        </>
     );
 }

@@ -1,18 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useSession } from 'next-auth/react'
 import type { RealtimeChannel } from '@supabase/supabase-js'
+import { Message, ReplyToMessage } from '@/types/chat.interface'
 
-interface Message {
-  id: string
-  user_id: string
-  content: string
-  created_at: string
-  users?: {
-    name: string | null
-    avatar_url: string | null
-  } | null
-}
 
 export function useRealtimeChat() {
   const { data: session } = useSession()
@@ -20,7 +12,6 @@ export function useRealtimeChat() {
   const [loading, setLoading] = useState(true)
   const [channel, setChannel] = useState<RealtimeChannel | null>(null)
 
-  // Завантаження початкових повідомлень
   const loadMessages = useCallback(async () => {
     setLoading(true)
     try {
@@ -31,6 +22,14 @@ export function useRealtimeChat() {
           users (
             name,
             avatar_url
+          ),
+          reply_to:messages!reply_to_id (
+            id,
+            content,
+            users (
+              name,
+              avatar_url
+            )
           )
         `)
         .order('created_at', { ascending: true })
@@ -39,7 +38,15 @@ export function useRealtimeChat() {
       if (error) {
         console.error('Error loading messages:', error)
       } else if (data) {
-        setMessages(data)
+        const normalizedMessages = data.map((msg: any) => ({
+          ...msg,
+          users: Array.isArray(msg.users) ? msg.users[0] : msg.users,
+          reply_to: msg.reply_to ? {
+            ...msg.reply_to,
+            users: Array.isArray(msg.reply_to.users) ? msg.reply_to.users[0] : msg.reply_to.users
+          } : null
+        }))
+        setMessages(normalizedMessages)
       }
     } catch (error) {
       console.error('Error loading messages:', error)
@@ -52,7 +59,6 @@ export function useRealtimeChat() {
     loadMessages()
   }, [loadMessages])
 
-  // Підписка на realtime оновлення
   useEffect(() => {
     const newChannel = supabase
       .channel('public:messages')
@@ -66,16 +72,40 @@ export function useRealtimeChat() {
         async (payload) => {
           console.log('New message received:', payload)
           
-          // Отримуємо дані користувача для нового повідомлення
           const { data: userData } = await supabase
             .from('users')
             .select('name, avatar_url')
             .eq('id', payload.new.user_id)
             .single()
 
+          let replyToData: ReplyToMessage | null = null
+          if (payload.new.reply_to_id) {
+            const { data: replyMessage } = await supabase
+              .from('messages')
+              .select(`
+                id,
+                content,
+                users (
+                  name,
+                  avatar_url
+                )
+              `)
+              .eq('id', payload.new.reply_to_id)
+              .single()
+            
+            if (replyMessage) {
+              replyToData = {
+                id: replyMessage.id,
+                content: replyMessage.content,
+                users: Array.isArray(replyMessage.users) ? replyMessage.users[0] : replyMessage.users
+              }
+            }
+          }
+
           const newMessage: Message = {
-            ...(payload.new as Omit<Message, 'users'>),
+            ...(payload.new as Message),
             users: userData,
+            reply_to: replyToData,
           }
 
           setMessages((current) => [...current, newMessage])
@@ -93,7 +123,7 @@ export function useRealtimeChat() {
     }
   }, [])
 
-  const sendMessage = async (content: string) => {
+  const sendMessage = async (content: string, replyToId?: string) => {
     if (!session?.user?.email) {
       console.error('No user session')
       return { error: 'Not authenticated' }
@@ -105,6 +135,7 @@ export function useRealtimeChat() {
         .insert({
           user_id: session.user.email,
           content: content.trim(),
+          reply_to_id: replyToId || null,
         })
 
       if (error) {

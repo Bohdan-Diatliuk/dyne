@@ -1,4 +1,4 @@
-import { PostCardProps } from "@/types/post";
+import { PostCardProps } from "@/types/post.types";
 import Link from "next/link";
 
 export default function PostCard({ createdAt, author, content }: PostCardProps) {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { PostCardProps } from "@/types/post";
+import { PostCardProps } from "@/types/post.types";
 import { toast } from "sonner";
 
 
