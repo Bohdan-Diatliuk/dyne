@@ -1,3 +1,4 @@
+import { createUsername } from "@/utils/createUsername";
 import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -14,7 +15,7 @@ export const authConfig: AuthOptions = {
     callbacks: {
         async jwt({token, user, account}) {
             if (user) {
-                token.id = user.id;
+                token.id = token.sub!;
                 token.email = user.email;
                 token.name = user.name;
                 token.picture = user.image;
@@ -23,10 +24,11 @@ export const authConfig: AuthOptions = {
         },
         async session({session, token}) {
             if (token && session.user) {
-                session.user.id = token.id as string;
-                session.user.email = token.email as string;
-                session.user.name = token.name as string;
+                session.user.id = token.sub!;
+                session.user.email = token.email!;
+                session.user.name = token.name!;
                 session.user.image = token.picture as string;
+                session.user.username = createUsername(token.name as string);
             }
             return session;
         },
