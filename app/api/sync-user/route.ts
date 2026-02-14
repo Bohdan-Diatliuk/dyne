@@ -22,7 +22,6 @@ export async function POST() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Використовуємо email як ID, оскільки Google ID може бути довгим
     const userId = session.user.email!
 
     const { data, error } = await supabase
