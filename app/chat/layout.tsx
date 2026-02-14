@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div>
                 {children}
             </div>
-            <MainEffect words={['chat', 'odaaa', 'poplavsky']} zIndex={-1} />
+            <MainEffect words={['naverande','oyy','yeees','odaaa', 'bananchikiiii']} numberCount={162} maxOpacity={0.5} />
         </main>
     )
 }

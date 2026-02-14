@@ -148,11 +148,11 @@ export default function Page() {
                       )}
                       
                       {message.reply_to && (
-                        <div className={`text-xs mb-2 pb-2 border-l-2 pl-2 ${
+                        <div className={`text-xs mb-2 py-2 border-l-2 rounded-lg pl-2 ${
                             isOwn ? 'border-gray-600 opacity-70' : 'border-gray-400 opacity-60'
                           }`}>
                           <div className="font-semibold">
-                            Відповідь на: {message.reply_to.users?.name || 'Невідомий'}
+                            {message.reply_to.users?.name || 'Невідомий'} :
                           </div>
                           <div className="truncate">
                             {message.reply_to.content}
@@ -188,18 +188,18 @@ export default function Page() {
 
       <div className="p-4">
         {replyTo && (
-          <div className="mb-2 p-3 bg-gray-100 rounded-lg flex justify-between items-start">
+          <div className="mb-2 p-3 bg-gray-800 rounded-lg flex justify-between items-start">
             <div className="flex-1">
-              <div className="text-xs font-semibold text-gray-600 mb-1">
-                Відповідь на {replyTo.users?.name || 'Невідомий'}
+              <div className="text-xs font-semibold text-gray-300 mb-1 pb-2 border-b border-gray-500">
+                Відповісти {replyTo.users?.name || 'Невідомий'}
               </div>
-              <div className="text-sm text-gray-700 truncate">
+              <div className="text-md text-white truncate">
                 {replyTo.content}
               </div>
             </div>
             <button
               onClick={cancelReply}
-              className="ml-2 text-gray-500 hover:text-gray-700"
+              className="ml-2 text-white hover:text-gray-700"
             >
               <X />
             </button>
