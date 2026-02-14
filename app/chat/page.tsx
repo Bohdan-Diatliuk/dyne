@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-export default function Page() {
+export default function ChatPage() {
   const { data: session, status } = useSession()
   const { messages, loading, sendMessage } = useRealtimeChat()
   const [input, setInput] = useState('')

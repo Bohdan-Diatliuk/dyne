@@ -5,7 +5,7 @@ import { PostCardProps } from '@/types/post.types';
 import { useEffect, useState } from 'react';
 import { useSession } from "next-auth/react";
 
-export default function Page() {
+export default function FeedPage() {
   const [posts, setPosts] = useState<PostCardProps[]>([]);
   const { data: session, status } = useSession();
 

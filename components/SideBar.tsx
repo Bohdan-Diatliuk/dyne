@@ -3,19 +3,21 @@
 import Link from "next/link";
 import { useState } from "react";
 import { HomeIcon, Users, UserPenIcon, UserSearchIcon, UserRound, UserRoundCog, MessageCircleMore } from 'lucide-react'
+import { useSession } from "next-auth/react";
 
-const menuItems = [
+export default function Sidebar() {
+    const [isOpen, setIsOpen] = useState(false);
+    const { data: session } = useSession();
+
+    const menuItems = [
     { icon: HomeIcon, label: 'Home', href: '/feed' },
     { icon: MessageCircleMore, label: 'Chat', href: '/chat' },
     { icon: Users, label: 'Messages', href: '/messages' },
     { icon: UserPenIcon, label: 'Create', href: '/post/new' },
     { icon: UserSearchIcon, label: 'Search', href: '/search' },
-    { icon: UserRound, label: 'Profile', href: '/profile' },
+    { icon: UserRound, label: 'Profile', href: `/profile/${session?.user?.username}` },
     { icon: UserRoundCog, label: 'Settings', href: '/settings' },
 ];
-
-export default function Sidebar() {
-    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className="h-screen py-5 px-4 mx-0 sticky top-0" 

@@ -6,7 +6,7 @@ import { PostCardProps } from "@/types/post.types";
 import { toast } from "sonner";
 
 
-export default function Page() {
+export default function PostNewPage() {
     const [author, setAuthor] = useState('');
     const [content, setContent] = useState('');
     const router = useRouter();
