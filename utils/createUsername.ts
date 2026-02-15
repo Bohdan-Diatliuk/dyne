@@ -1,4 +1,3 @@
-// utils/createUsername.ts
 export function createUsername(name: string): string {
     const translitMap: { [key: string]: string } = {
         'а': 'a', 'б': 'b', 'в': 'v', 'г': 'h', 'ґ': 'g', 'д': 'd', 'е': 'e', 'є': 'ye',
@@ -13,6 +12,7 @@ export function createUsername(name: string): string {
     };
 
     return name
+        .replace(/^@+/, '')
         .split('')
         .map(char => translitMap[char] || char)
         .join('')
