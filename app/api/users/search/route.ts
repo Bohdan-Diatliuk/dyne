@@ -19,7 +19,6 @@ export async function GET(req: NextRequest) {
       .select("id, name, email, username, avatar_url")
       .limit(20);
 
-    // Якщо є query, фільтруємо
     if (query && query.trim().length > 0) {
       supabaseQuery = supabaseQuery.or(`name.ilike.%${query}%,username.ilike.%${query}%`);
     }
