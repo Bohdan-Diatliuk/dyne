@@ -165,6 +165,8 @@ export default function ChatPage() {
                         {new Date(message.created_at).toLocaleTimeString('uk-UA', {
                           hour: '2-digit',
                           minute: '2-digit',
+                          day: 'numeric',
+                          month: '2-digit'
                         })}
                       </div>
                     </div>

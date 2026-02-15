@@ -1,3 +1,7 @@
 export default function SettingsPage() {
-    return <h1>Seeee</h1>
+    return (
+        <div className="flex flex-col justify-center items-center">
+            <h1>seeee</h1>
+        </div>
+    );
 }
