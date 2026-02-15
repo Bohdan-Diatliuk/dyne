@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authConfig } from '@/config/auth'
 import { createClient } from '@supabase/supabase-js'
+import { createUsername } from '@/utils/createUsername'
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -23,6 +24,34 @@ export async function POST() {
     }
 
     const userId = session.user.email!
+    
+    const { data: existingUserById } = await supabase
+      .from('users')
+      .select('id, username')
+      .eq('id', userId)
+      .single()
+
+    let finalUsername: string
+
+    if (existingUserById?.username && !existingUserById.username.startsWith('@')) {
+      finalUsername = existingUserById.username
+    } else {
+      const baseUsername = createUsername(session.user.name || session.user.email!.split('@')[0])
+      
+      const { data: existingUserByUsername } = await supabase
+        .from('users')
+        .select('id, username')
+        .eq('username', baseUsername)
+        .neq('id', userId)
+        .single()
+
+      if (existingUserByUsername) {
+        const randomSuffix = Math.floor(Math.random() * 9999)
+        finalUsername = `${baseUsername}-${randomSuffix}`
+      } else {
+        finalUsername = baseUsername
+      }
+    }
 
     const { data, error } = await supabase
       .from('users')
@@ -30,10 +59,12 @@ export async function POST() {
         id: userId,
         email: session.user.email,
         name: session.user.name,
+        username: finalUsername,
         avatar_url: session.user.image,
         updated_at: new Date().toISOString(),
       }, {
-        onConflict: 'id'
+        onConflict: 'id',
+        ignoreDuplicates: false
       })
       .select()
       .single()
