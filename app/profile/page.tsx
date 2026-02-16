@@ -7,6 +7,7 @@ export default async function RedirectPage() {
 
     if (!user) {
         redirect('/');
+        return null;
     }
 
     const { data: dbUser } = await supabase
@@ -17,7 +18,9 @@ export default async function RedirectPage() {
 
     if (!dbUser?.username) {
         redirect('/');
+        return null;
     }
 
     redirect(`/profile/${dbUser.username}`);
+    return null;
 }
