@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { oswald } from "@/components/ui/fonts";
 import "@/components/ui/globals.css";
 import { Toaster } from "sonner";
-import NextAuthProvider from "@/components/providers/SessionProvider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
@@ -23,12 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${oswald.className} antialiased`}
-      >
-        <NextAuthProvider>
-          {children}
-        </NextAuthProvider>
+      <body className={`${oswald.className} antialiased`}>
+        {children}
         <Toaster position="top-center" theme="dark" />
         <SpeedInsights />
       </body>

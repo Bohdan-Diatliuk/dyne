@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authConfig } from "@/config/auth";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const session = await getServerSession(authConfig);
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
     
-    if (!session) {
+    if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -19,7 +18,6 @@ export async function GET(req: NextRequest) {
       .select("id, name, email, username, avatar_url")
       .limit(20);
 
-    // Якщо є query, фільтруємо
     if (query && query.trim().length > 0) {
       supabaseQuery = supabaseQuery.or(`name.ilike.%${query}%,username.ilike.%${query}%`);
     }

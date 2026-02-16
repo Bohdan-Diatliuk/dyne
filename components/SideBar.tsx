@@ -13,9 +13,9 @@ import {
   MessageCircleMore,
   X
 } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { createClient } from "@/lib/supabase/client";
+import { User } from "@supabase/supabase-js";
 import { UserSide } from "@/types/users.interface";
-
 
 export default function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,7 +23,37 @@ export default function Sidebar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<UserSide[]>([]);
   const [isSearching, setIsSearching] = useState(false);
-  const { data: session } = useSession();
+  const [user, setUser] = useState<User | null>(null);
+  const [username, setUsername] = useState<string>('');
+
+  const supabase = createClient();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+
+      if (user) {
+        const { data: dbUser } = await supabase
+          .from('users')
+          .select('username')
+          .eq('id', user.id)
+          .single();
+        
+        if (dbUser) {
+          setUsername(dbUser.username);
+        }
+      }
+    };
+
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   const menuItems = [
     { icon: HomeIcon, label: "Home", href: "/feed" },
@@ -31,7 +61,7 @@ export default function Sidebar() {
     { icon: Users, label: "Messages", href: "/messages" },
     { icon: UserPenIcon, label: "Create", href: "/post/new" },
     { icon: UserSearchIcon, label: "Search", action: () => setIsSearchOpen(true) },
-    { icon: UserRound, label: "Profile", href: `/profile/${session?.user?.username}` },
+    { icon: UserRound, label: "Profile", href: `/profile/${username}` },
     { icon: UserRoundCog, label: "Settings", href: "/settings" },
   ];
 

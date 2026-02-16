@@ -1,18 +1,35 @@
-'use client';
-
 import MainEffect from "@/components/effects/mainEffect";
-import { useRouter } from "next/navigation";
-import { signIn, useSession, signOut } from "next-auth/react";
-import Loading from "./loading";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import SignInButton from "@/components/SignInButton";
+import SignOutButton from "@/components/SignOutButton";
 
-export default function Home() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+export default async function Home() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  if (status === 'loading') {
-    return <Loading />;
+  if (user) {
+    const { data: dbUser } = await supabase
+      .from('users')
+      .select('*')
+      .eq('id', user.id)
+      .single();
+
+    if (!dbUser) {
+      const username = user.user_metadata.full_name
+        ? user.user_metadata.full_name.toLowerCase().replace(/\s+/g, '-')
+        : user.email!.split('@')[0];
+
+      await supabase.from('users').insert({
+        id: user.id,
+        email: user.email,
+        name: user.user_metadata.full_name || user.email?.split('@')[0],
+        username: username,
+        avatar_url: user.user_metadata.avatar_url,
+      });
+    }
   }
-  
+
   return (
     <div className="relative flex justify-center items-center h-screen">
       <MainEffect />
@@ -20,33 +37,22 @@ export default function Home() {
       <div className="flex flex-col items-center justify-center gap-8 z-10">
         <p className="text-6xl font-bold">DYNE</p>
         
-        {status === 'authenticated' && session?.user ? (
+        {user ? (
           <>
-            <h1 className="text-3xl font-bold">Вітаємо, {session.user.name}!</h1>
+            <h1 className="text-3xl font-bold">Вітаємо, {user.user_metadata.full_name}!</h1>
             <div className="flex gap-4">
-              <button
-                onClick={() => router.push('/feed')}
-                className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-700 transition-colors"
-              >
-                Продовжити
-              </button>
-              <button
-                onClick={() => signOut({ callbackUrl: '/' })}
-                className="rounded-lg bg-gray-700 px-6 py-3 text-white hover:bg-gray-900 transition-colors"
-              >
-                Вийти
-              </button>
+              <form action="/feed">
+                <button className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-700 transition-colors">
+                  Продовжити
+                </button>
+              </form>
+              <SignOutButton />
             </div>
           </>
         ) : (
           <>
             <h1 className="text-3xl font-bold">Вітаємо!</h1>
-            <button
-              onClick={() => signIn('google')}
-              className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-700 transition-colors"
-            >
-              Увійти через Google
-            </button>
+            <SignInButton />
           </>
         )}
       </div>
