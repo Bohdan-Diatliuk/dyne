@@ -1,7 +1,5 @@
-import { authConfig } from "@/config/auth";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { supabase } from "@/lib/supabase";
+import { createClient } from "@/lib/supabase/server";
 import Image from "next/image";
 import { UserRound } from "lucide-react";
 import FollowButton from "@/components/FollowButton";
@@ -12,11 +10,12 @@ export default async function ProfilePage({
 }: {
     params: { author: string }
 }) {
-    const session = await getServerSession(authConfig);
+    const supabase = await createClient();
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
     const { author } = await params;
 
-    if (!session) {
-        redirect('/')
+    if (!currentUser) {
+        redirect('/');
     }
 
     const { data: user, error } = await supabase
@@ -33,7 +32,7 @@ export default async function ProfilePage({
         );
     }
 
-    const isOwner = session?.user?.email === user.email;
+    const isOwner = currentUser.id === user.id;
 
     const { count: followersCount } = await supabase
         .from('follows')
@@ -48,7 +47,7 @@ export default async function ProfilePage({
     const { data: followData } = await supabase
         .from('follows')
         .select('id')
-        .eq('follower_id', session.user.email)
+        .eq('follower_id', currentUser.id)
         .eq('following_id', user.id)
         .single();
 
@@ -74,28 +73,28 @@ export default async function ProfilePage({
 
                     <div className="flex-1">
                         <h1 className="text-3xl font-bold mb-2">{user.name}</h1>
-                        <p className="text-gray-500 dark:text-gray-400 mb-4">@{user.username}</p>
+                        <p className="text-gray-500 dark:text-gray-400 mb-2">@{user.username}</p>
                         
                         {user.bio && (
-                            <p>
+                            <p className="text-gray-700 dark:text-gray-300 mb-4">
                                 {user.bio}
                             </p>
                         )}
 
                         {isOwner ? (
-                                <EditProfileBtn user={{ 
-                                    name: user.name,
-                                    username: user.username,
-                                    bio: user.bio,
-                                    avatar_url: user.avatar_url
-                                }} />
-                                ) : (
-                                    <FollowButton 
-                                        userId={user.id}
-                                        initialIsFollowing={isFollowing}
-                                        initialFollowers={followersCount || 0}
-                                    />
-                            )}
+                            <EditProfileBtn user={{ 
+                                name: user.name,
+                                username: user.username,
+                                bio: user.bio,
+                                avatar_url: user.avatar_url
+                            }} />
+                        ) : (
+                            <FollowButton 
+                                userId={user.id}
+                                initialIsFollowing={isFollowing}
+                                initialFollowers={followersCount || 0}
+                            />
+                        )}
                     </div>
                 </div>
 

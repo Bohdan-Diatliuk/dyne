@@ -1,14 +1,13 @@
-import { authConfig } from "@/config/auth";
-import { supabase } from "@/lib/supabase";
-import { createUsername } from "@/utils/createUsername";
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import { createUsername } from "@/utils/createUsername";
 
 export async function PUT(req: NextRequest) {
     try {
-        const session = await getServerSession(authConfig);
+        const supabase = await createClient();
+        const { data: { user } } = await supabase.auth.getUser();
 
-        if (!session?.user?.email) {
+        if (!user) {
             return NextResponse.json(
                 { error: "Unauthorized" },
                 { status: 401 }
@@ -38,7 +37,7 @@ export async function PUT(req: NextRequest) {
                 .from("users")
                 .select("id")
                 .eq("username", generatedUsername)
-                .neq("id", session.user.email)
+                .neq("id", user.id)
                 .single();
                 
             if (existingUser) {
@@ -54,7 +53,7 @@ export async function PUT(req: NextRequest) {
         const { data, error } = await supabase
             .from("users")
             .update(updateData)
-            .eq("id", session.user.email)
+            .eq("id", user.id)
             .select()
             .single();
 

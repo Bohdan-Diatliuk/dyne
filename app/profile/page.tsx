@@ -1,12 +1,23 @@
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
 export default async function RedirectPage() {
-    const session = await getServerSession();
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
 
-    if (!session!.user?.id) {
+    if (!user) {
         redirect('/');
     }
 
-    redirect(`/profile/${session?.user.id}`);
+    const { data: dbUser } = await supabase
+        .from('users')
+        .select('username')
+        .eq('id', user.id)
+        .single();
+
+    if (!dbUser?.username) {
+        redirect('/');
+    }
+
+    redirect(`/profile/${dbUser.username}`);
 }

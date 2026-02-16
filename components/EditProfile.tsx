@@ -93,7 +93,6 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
             if (response.ok) {
                 const data = await response.json();
                 
-                // Якщо username змінився, перенаправляємо на новий URL
                 if (usernameChanged && data.user?.username) {
                     router.push(`/profile/${data.user.username}`);
                 } else {
@@ -137,7 +136,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
                 className="rounded-full object-cover"
               />
             ) : (
-              <div className="w-[120px] h-[120px] rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center">
+              <div className="w-30 h-30 rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center">
                 <Camera size={40} className="text-gray-500" />
               </div>
             )}

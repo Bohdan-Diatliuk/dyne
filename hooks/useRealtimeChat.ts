@@ -1,16 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState, useCallback } from 'react'
-import { supabase } from '@/lib/supabase'
-import { useSession } from 'next-auth/react'
-import type { RealtimeChannel } from '@supabase/supabase-js'
+import { createClient } from '@/lib/supabase/client'
+import type { RealtimeChannel, User } from '@supabase/supabase-js'
 import { Message, ReplyToMessage } from '@/types/chat.interface'
 
-
 export function useRealtimeChat() {
-  const { data: session } = useSession()
+  const supabase = createClient()
+  const [user, setUser] = useState<User | null>(null)
   const [messages, setMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState(true)
   const [channel, setChannel] = useState<RealtimeChannel | null>(null)
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      setUser(user)
+    }
+
+    getUser()
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   const loadMessages = useCallback(async () => {
     setLoading(true)
@@ -165,7 +179,7 @@ export function useRealtimeChat() {
   }, [])
 
   const sendMessage = async (content: string, replyToId?: string) => {
-    if (!session?.user?.email) {
+    if (!user?.id) {
       console.error('No user session')
       return { error: 'Not authenticated' }
     }
@@ -176,7 +190,7 @@ export function useRealtimeChat() {
       const { error, data } = await supabase
         .from('messages')
         .insert({
-          user_id: session.user.email,
+          user_id: user.id,
           content: content.trim(),
           reply_to_id: replyToId || null,
         })

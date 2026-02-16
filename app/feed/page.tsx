@@ -1,29 +1,18 @@
-'use client';
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 
-import  PostCard  from "@/components/PostCard";
-import { PostCardProps } from '@/types/post.types';
-import { useEffect, useState } from 'react';
-import { useSession } from "next-auth/react";
+export default async function FeedPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-export default function FeedPage() {
-  const [posts, setPosts] = useState<PostCardProps[]>([]);
-  const { data: session, status } = useSession();
-
-  useEffect(() => {
-    const savedPosts = JSON.parse(localStorage.getItem('posts') || '[]');
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setPosts(savedPosts);
-  }, []);
-
-  if (status === 'loading') {
-    return null;
+  if (!user) {
+    redirect('/');
   }
 
   return (
-        <div className="flex flex-col w-full max-w-110 mx-auto mt-30">
-          {posts.map((post, index) => (
-            <PostCard key={`${post.id}-${index}`} id={post.id} createdAt={post.createdAt} author={post.author} content={post.content} />
-          ))}
-        </div>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">Feed</h1>
+      <p>Вітаємо, {user.user_metadata.full_name}!</p>
+    </div>
   );
 }

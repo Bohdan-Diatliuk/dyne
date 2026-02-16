@@ -2,7 +2,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react'
-import { useSession } from 'next-auth/react'
+import { createClient } from '@/lib/supabase/client'
+import { User } from '@supabase/supabase-js'
 import { useRealtimeChat } from '@/hooks/useRealtimeChat'
 import Image from 'next/image';
 import { toast } from 'sonner';
@@ -10,23 +11,36 @@ import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function ChatPage() {
-  const { data: session, status } = useSession()
-  const { messages, loading, sendMessage } = useRealtimeChat()
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
+  const { messages, loading: messagesLoading, sendMessage } = useRealtimeChat()
   const [input, setInput] = useState('')
   const [sending, setSending] = useState(false)
   const [replyTo, setReplyTo] = useState<any>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const router = useRouter();
+  const supabase = createClient()
 
   useEffect(() => {
-    if (session?.user) {
-      fetch('/api/sync-user', { method: 'POST' })
-        .then(res => res.json())
-        .then(data => console.log('User synced:', data))
-        .catch(err => console.error('Error syncing user:', err))
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      setUser(user)
+      setLoading(false)
+      
+      if (!user) {
+        router.push('/')
+      }
     }
-  }, [session])
+
+    getUser()
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -66,12 +80,16 @@ export default function ChatPage() {
     router.push('/feed');
   }
 
-  if (status === 'loading') {
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-lg">Завантаження...</div>
       </div>
     )
+  }
+
+  if (!user) {
+    return null
   }
 
   return (
@@ -80,7 +98,7 @@ export default function ChatPage() {
         <div>
           <h1 className="text-xl font-bold">Global Chat</h1>
           <p className="text-sm text-gray-400">
-            Увійшли як {session?.user.name}
+            Увійшли як {user.user_metadata.full_name || user.email}
           </p>
         </div>
         <button
@@ -95,7 +113,7 @@ export default function ChatPage() {
         ref={messagesContainerRef}
         className="flex-1 overflow-y-auto p-4 space-y-4"
       >
-        {loading ? (
+        {messagesLoading ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-gray-500">Завантаження повідомлень...</div>
           </div>
@@ -107,7 +125,7 @@ export default function ChatPage() {
           </div>
         ) : (
           messages.map((message) => {
-            const isOwn = message.user_id === session?.user.email
+            const isOwn = message.user_id === user.id
             
             return (
               <div
@@ -126,7 +144,7 @@ export default function ChatPage() {
                           height={42}
                         />
                       ) : (
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm">
+                        <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center text-sm">
                           {message.users?.name?.[0]?.toUpperCase() || '?'}
                         </div>
                       )}
