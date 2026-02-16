@@ -4,6 +4,7 @@ import Image from "next/image";
 import { UserRound } from "lucide-react";
 import FollowButton from "@/components/FollowButton";
 import EditProfileBtn from "@/components/EditProfileBtn";
+import ProfileStats from "@/components/ProfileStats";
 
 export default async function ProfilePage({
     params
@@ -66,7 +67,7 @@ export default async function ProfilePage({
                             className="rounded-full object-cover"
                         />
                     ) : (
-                        <div className="w-30 h-30 rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center">
+                        <div className="w-[120px] h-[120px] rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center">
                             <UserRound size={60} />
                         </div>
                     )}
@@ -98,22 +99,11 @@ export default async function ProfilePage({
                     </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-zinc-800">
-                    <div className="grid grid-cols-3 gap-4 text-center">
-                        <div>
-                            <p className="text-2xl font-bold">0</p>
-                            <p className="text-gray-500 dark:text-gray-400">Posts</p>
-                        </div>
-                        <div>
-                            <p className="text-2xl font-bold">{followersCount || 0}</p>
-                            <p className="text-gray-500 dark:text-gray-400">Followers</p>
-                        </div>
-                        <div>
-                            <p className="text-2xl font-bold">{followingCount || 0}</p>
-                            <p className="text-gray-500 dark:text-gray-400">Following</p>
-                        </div>
-                    </div>
-                </div>
+                <ProfileStats 
+                    userId={user.id}
+                    initialFollowers={followersCount || 0}
+                    initialFollowing={followingCount || 0}
+                />
             </div>
 
             <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-8">

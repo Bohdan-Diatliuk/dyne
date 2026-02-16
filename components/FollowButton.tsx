@@ -1,17 +1,53 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { UserPlus, UserMinus } from 'lucide-react';
-import { FollowProps } from '@/types/profile.interface';
+import { createClient } from '@/lib/supabase/client';
+
+interface FollowButtonProps {
+  userId: string;
+  initialIsFollowing: boolean;
+  initialFollowers: number;
+}
 
 export default function FollowButton({ 
   userId, 
   initialIsFollowing,
   initialFollowers 
-}: FollowProps) {
+}: FollowButtonProps) {
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
   const [followersCount, setFollowersCount] = useState(initialFollowers);
   const [isLoading, setIsLoading] = useState(false);
+  const supabase = createClient();
+
+  // Realtime підписка на зміни
+  useEffect(() => {
+    const channel = supabase
+      .channel(`follows:${userId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'follows',
+          filter: `following_id=eq.${userId}`,
+        },
+        (payload) => {
+          console.log('Follow change:', payload);
+          
+          if (payload.eventType === 'INSERT') {
+            setFollowersCount(prev => prev + 1);
+          } else if (payload.eventType === 'DELETE') {
+            setFollowersCount(prev => Math.max(0, prev - 1));
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId]);
 
   const handleFollow = async () => {
     setIsLoading(true);
@@ -44,7 +80,7 @@ export default function FollowButton({
           flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors
           ${isFollowing 
             ? 'bg-gray-200 dark:bg-zinc-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-zinc-700' 
-            : 'bg-blue-500 text-white hover:bg-gray-600'
+            : 'bg-blue-500 text-white hover:bg-blue-600'
           }
           disabled:opacity-50 disabled:cursor-not-allowed
         `}
@@ -61,9 +97,6 @@ export default function FollowButton({
           </>
         )}
       </button>
-      <span className="text-sm text-gray-500 dark:text-gray-400">
-        {followersCount} {followersCount === 1 ? 'follower' : 'followers'}
-      </span>
     </div>
   );
 }
