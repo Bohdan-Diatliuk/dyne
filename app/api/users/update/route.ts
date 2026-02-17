@@ -33,13 +33,20 @@ export async function PUT(req: NextRequest) {
         if (username) {
             const generatedUsername = createUsername(username);
 
-            const { data: existingUser } = await supabase
+            const { data: existingUser, error: checkError } = await supabase
                 .from("users")
                 .select("id")
                 .eq("username", generatedUsername)
                 .neq("id", user.id)
-                .single();
-                
+                .maybeSingle();
+
+            if (checkError) {
+                return NextResponse.json(
+                    { error: "Failed to check username" },
+                    { status: 500 }
+                );
+            }
+
             if (existingUser) {
                 return NextResponse.json(
                     { error: "Username already taken" },

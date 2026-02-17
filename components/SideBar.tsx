@@ -125,8 +125,6 @@ export default function Sidebar() {
           h-screen fixed top-0 left-0 z-30
           text-foreground
           transition-all duration-300
-          overflow-hidden
-          hidden lg:block
           ${isSidebarOpen ? "w-36" : "w-20"}
         `}
         onMouseEnter={() => setIsSidebarOpen(true)}
