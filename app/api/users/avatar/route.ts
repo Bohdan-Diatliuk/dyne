@@ -17,16 +17,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
-    if (!file.type.startsWith("image/")) {
-      return NextResponse.json({ error: "File must be an image" }, { status: 400 });
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      return NextResponse.json({ error: "File size must be less than 5MB" }, { status: 400 });
-    }
-
     const fileExt = file.name.split(".").pop();
-    const fileName = `${user.id}-${Date.now()}.${fileExt}`;
+    const fileName = `${user.id}/${Date.now()}.${fileExt}`;
 
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from("avatars")
