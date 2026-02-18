@@ -20,7 +20,6 @@ export default function FollowButton({
   const [isLoading, setIsLoading] = useState(false);
   const supabase = createClient();
 
-  // Realtime підписка на зміни
   useEffect(() => {
     const channel = supabase
       .channel(`follows:${userId}`)
@@ -80,7 +79,7 @@ export default function FollowButton({
           flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors
           ${isFollowing 
             ? 'bg-gray-200 dark:bg-zinc-800 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-zinc-700' 
-            : 'bg-blue-500 text-white hover:bg-blue-600'
+            : 'bg-gray-500 text-white hover:bg-gray-300 hover:text-black'
           }
           disabled:opacity-50 disabled:cursor-not-allowed
         `}
