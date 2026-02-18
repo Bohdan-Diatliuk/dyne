@@ -67,7 +67,7 @@ export default async function ProfilePage({
                             className="rounded-full object-cover"
                         />
                     ) : (
-                        <div className="w-[120px] h-[120px] rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center">
+                        <div className="w-30 h-30 rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center">
                             <UserRound size={60} />
                         </div>
                     )}
