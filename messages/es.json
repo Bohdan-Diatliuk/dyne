@@ -1,0 +1,91 @@
+{
+    "home": {
+        "welcome": "¡Bienvenido, {name}!",
+        "welcomeGuest": "¡Bienvenido!",
+        "continue": "Continuar"
+    },
+    "signin": {
+        "signIn": "Iniciar sesión con Google"
+    },
+    "sidebar": {
+        "home": "Inicio",
+        "chat": "Chat",
+        "messages": "Mensajes",
+        "create": "Crear",
+        "search": "Buscar",
+        "profile": "Perfil",
+        "settings": "Configuración"
+    },
+    "feed": {
+
+    },
+    "chat": {
+        "global": "Chat global",
+        "sign": "Conectado como {name}",
+        "exit": "Salir",
+        "messageLoading": "Cargando mensajes...",
+        "messageZero": "Aún no hay mensajes. ¡Sé el primero en iniciar la conversación!",
+        "unknown": "Desconocido",
+        "answer": "Responder",
+        "answerTo": "Responder a {name}",
+        "enterMessage": "Escribe un mensaje...",
+        "sending": "Enviando...",
+        "send": "Enviar"
+    },
+    "messages": {
+
+    },
+    "create": {
+        "header": "Crear una nueva publicación",
+        "post": "¿Qué quieres decir?",
+        "send": "Publicar"
+    },
+    "search": {
+        "title": "Buscar",
+        "placeholder": "Buscar por nombre o usuario",
+        "searching": "Buscando...",
+        "notFound": "No se encontró ningún usuario"
+    },
+    "profile": {
+        "post": "Publicaciones",
+        "postCount": "Aún no hay publicaciones"
+    },
+    "profileEditBtn": {
+        "edit": "Editar perfil"
+    },
+    "profileEdit": {
+        "edit": "Editar perfil",
+        "changeAvatar": "Haz clic en el ícono de la cámara para cambiar el avatar",
+        "name": "Nombre",
+        "placeholderName": "Tu nombre",
+        "username": "Nombre de usuario",
+        "placeholderUser": "usuario",
+        "rules": "Solo letras minúsculas, números y guiones",
+        "bio": "Biografía",
+        "placeholderBio": "Cuéntanos algo sobre ti",
+        "cancel": "Cancelar",
+        "saving": "Guardando...",
+        "save": "Guardar"
+    },
+    "profileStatus": {
+        "post": "Publicaciones",
+        "followers": "Seguidores",
+        "following": "Siguiendo"
+    },
+    "button": {
+        "follow": "Seguir",
+        "unfollow": "Dejar de seguir"
+    },
+    "settings":  {
+        "setting": "Configuración",
+        "appearance": "Apariencia",
+        "theme": "Tema",
+        "privacy": "Privacidad y seguridad",
+        "changePassword": "Cambiar contraseña",
+        "update": "Actualizar",
+        "preference": "Preferencias de la aplicación",
+        "language": "Idioma:",
+        "danger": "Zona de peligro",
+        "delete": "Eliminar cuenta"
+    }
+}
