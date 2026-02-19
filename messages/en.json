@@ -4,10 +4,89 @@
         "welcomeGuest": "Welcome!",
         "continue": "Continue"
     },
-    "nav": {
-        "feed": "Feed",
-        "profile": "Profile",
+    "signin": {
+        "signIn": "Sign in with Google"
+    },
+    "sidebar": {
+        "home": "Home",
+        "chat": "Chat",
         "messages": "Messages",
+        "create": "Create",
+        "search": "Search",
+        "profile": "Profile",
         "settings": "Settings"
+    },
+    "feed": {
+
+    },
+    "chat": {
+        "global": "Global Chat",
+        "sign": "Entered as {name}",
+        "exit": "Exit",
+        "messageLoading": "Uploading messages...",
+        "messageZero": "No messages yet. Be the first to start a conversation!",
+        "unknown": "Unknown",
+        "answer": "Answer",
+        "answerTo": "Answer to {name}",
+        "enterMessage": "Enter a message...",
+        "sending": "Sending...",
+        "send": "Send"
+
+    },
+    "messages": {
+
+    },
+    "create": {
+        "header": "Create a New Post",
+        "post": "What do you want to say?",
+        "send": "Send"
+    },
+    "search": {
+        "title": "Search",
+        "placeholder": "Search by name or username",
+        "searching": "Searching...",
+        "notFound": "No user Found"
+    },
+    "profile": {
+        "post": "Posts",
+        "postCount": "No posts yet"
+    },
+    "profileEditBtn": {
+        "edit": "Edit Profile"
+    },
+    "profileEdit": {
+        "edit": "Edit Profile",
+        "changeAvatar": "Click camera icon to change avatar",
+        "name": "Name",
+        "placeholderName": "Your name",
+        "username": "Username",
+        "placeholderUser": "username",
+        "rules": "Only lowercase letters, numbers and hyphens",
+        "bio": "Bio",
+        "placeholderBio": "Tell us about yourself",
+        "cancel": "Cancel",
+        "saving": "Saving",
+        "save": "Save"
+    },
+    "profileStatus": {
+        "post": "Posts",
+        "followers": "Followers",
+        "following": "Following"
+    },
+    "button": {
+        "follow": "Follow",
+        "unfollow": "Unfollow"
+    },
+    "settings":  {
+        "setting": "Settings",
+        "appearance": "Appearance",
+        "theme": "Theme",
+        "privacy": "Privacy & Security",
+        "changePassword": "Change password",
+        "update": "Update",
+        "preference": "App Preferences",
+        "language": "Languages:",
+        "danger": "Danger Zone",
+        "delete": "Delete account"
     }
 }
