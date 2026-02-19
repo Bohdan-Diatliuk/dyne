@@ -144,7 +144,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={isUploadingAvatar}
-              className="absolute bottom-0 right-0 p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors disabled:opacity-50"
+              className="absolute bottom-0 right-0 p-2 bg-gray-600 text-white rounded-full hover:bg-gray-300 hover:text-black transition-colors disabled:opacity-50"
             >
               {isUploadingAvatar ? '...' : <Camera size={20} />}
             </button>
@@ -179,7 +179,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
               onChange={(e) => setName(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg
                        bg-white dark:bg-zinc-800 text-foreground
-                       focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       focus:outline-none focus:ring-2 focus:ring-gray-500"
               placeholder="Your name"
               maxLength={50}
             />
@@ -196,7 +196,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
               onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
               className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg
                        bg-white dark:bg-zinc-800 text-foreground
-                       focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       focus:outline-none focus:ring-2 focus:ring-gray-500"
               placeholder="username"
               maxLength={30}
             />
@@ -215,7 +215,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
               onChange={(e) => setBio(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg
                        bg-white dark:bg-zinc-800 text-foreground
-                       focus:outline-none focus:ring-2 focus:ring-blue-500
+                       focus:outline-none focus:ring-2 focus:ring-gray-500
                        resize-none"
               placeholder="Tell us about yourself"
               rows={4}
@@ -238,8 +238,8 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg
-                       hover:bg-blue-600 transition-colors
+              className="flex-1 px-4 py-2 bg-gray-500 text-white rounded-lg
+                       hover:bg-gray-300 hover:text-black transition-colors
                        disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={isLoading || isUploadingAvatar}
             >
