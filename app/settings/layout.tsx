@@ -1,4 +1,10 @@
+import MainEffect from "@/components/effects/mainEffect"
 import Sidebar from "@/components/SideBar"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: 'Settings'
+}
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -7,6 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <main className="flex-1">
                 {children}
             </main>
+            <MainEffect words={['obama']} />
         </div>
     )
 }
