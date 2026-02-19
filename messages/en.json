@@ -1,0 +1,13 @@
+{
+    "home": {
+        "welcome": "Welcome, {name}!",
+        "welcomeGuest": "Welcome!",
+        "continue": "Continue"
+    },
+    "nav": {
+        "feed": "Feed",
+        "profile": "Profile",
+        "messages": "Messages",
+        "settings": "Settings"
+    }
+}

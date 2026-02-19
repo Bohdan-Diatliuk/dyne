@@ -1,0 +1,13 @@
+{
+    "home": {
+        "welcome": "Вітаємо, {name}!",
+        "welcomeGuest": "Вітаємо!",
+        "continue": "Продовжити"
+    },
+    "nav": {
+        "feed": "Стрічка",
+        "profile": "Профіль",
+        "messages": "Повідомлення",
+        "settings": "Налаштування"
+  }
+}
