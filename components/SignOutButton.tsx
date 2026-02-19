@@ -1,11 +1,13 @@
 'use client';
 
 import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
 export default function SignOutButton() {
   const router = useRouter();
   const supabase = createClient();
+  const t = useTranslations("chat");
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -18,7 +20,7 @@ export default function SignOutButton() {
       onClick={handleSignOut}
       className="rounded-lg bg-gray-700 px-6 py-3 text-white hover:bg-gray-900 transition-colors"
     >
-      Вийти
+      {t("exit")}
     </button>
   );
 }

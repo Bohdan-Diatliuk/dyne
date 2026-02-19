@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { UserPlus, UserMinus } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
 
 interface FollowButtonProps {
   userId: string;
@@ -19,6 +20,7 @@ export default function FollowButton({
   const [followersCount, setFollowersCount] = useState(initialFollowers);
   const [isLoading, setIsLoading] = useState(false);
   const supabase = createClient();
+  const t = useTranslations("button");
 
   useEffect(() => {
     const channel = supabase
@@ -87,12 +89,12 @@ export default function FollowButton({
         {isFollowing ? (
           <>
             <UserMinus size={18} />
-            Unfollow
+            {t("unfollow")}
           </>
         ) : (
           <>
             <UserPlus size={18} />
-            Follow
+            {t("follow")}
           </>
         )}
       </button>

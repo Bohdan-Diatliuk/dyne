@@ -29,6 +29,9 @@ export default function LanguageSelect() {
         <SelectContent className="bg-background">
           <SelectItem value="uk">Ukrainian</SelectItem>
           <SelectItem value="en">English</SelectItem>
+          <SelectItem value="cn">Chinese</SelectItem>
+          <SelectItem value="pl">Polski</SelectItem>
+          <SelectItem value="es">Spain</SelectItem>
         </SelectContent>
       </Select>
     </div>

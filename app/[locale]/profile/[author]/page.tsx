@@ -5,6 +5,7 @@ import { UserRound } from "lucide-react";
 import FollowButton from "@/components/FollowButton";
 import EditProfileBtn from "@/components/EditProfileBtn";
 import ProfileStats from "@/components/ProfileStats";
+import { getTranslations } from "next-intl/server";
 
 export default async function ProfilePage({
     params
@@ -14,6 +15,7 @@ export default async function ProfilePage({
     const supabase = await createClient();
     const { data: { user: currentUser } } = await supabase.auth.getUser();
     const { author } = await params;
+    const t = await getTranslations("profile");
 
     if (!currentUser) {
         redirect('/');
@@ -107,9 +109,9 @@ export default async function ProfilePage({
             </div>
 
             <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-8">
-                <h2 className="text-xl font-bold mb-4">Posts</h2>
+                <h2 className="text-xl font-bold mb-4">{t("post")}</h2>
                 <div className="text-center text-gray-500 dark:text-gray-400 py-12">
-                    No posts yet
+                    {t("postCount")}
                 </div>
             </div>
         </div>

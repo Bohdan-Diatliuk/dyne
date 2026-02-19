@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
+import { useTranslations } from 'next-intl';
 
 interface ProfileStatsProps {
   userId: string;
@@ -17,6 +18,7 @@ export default function ProfileStats({
   const [followersCount, setFollowersCount] = useState(initialFollowers);
   const [followingCount, setFollowingCount] = useState(initialFollowing);
   const supabase = createClient();
+  const t = useTranslations("profileStatus");
 
   useEffect(() => {
     
@@ -55,7 +57,7 @@ export default function ProfileStats({
         }
       )
       .subscribe((status) => {
-        console.log('📡 Follows subscription status:', status);
+        console.log('Follows subscription status:', status);
       });
 
     return () => {
@@ -69,15 +71,15 @@ export default function ProfileStats({
       <div className="grid grid-cols-3 gap-4 text-center">
         <div>
           <p className="text-2xl font-bold">0</p>
-          <p className="text-gray-500 dark:text-gray-400">Posts</p>
+          <p className="text-gray-500 dark:text-gray-400">{t("post")}</p>
         </div>
         <div>
           <p className="text-2xl font-bold">{followersCount}</p>
-          <p className="text-gray-500 dark:text-gray-400">Followers</p>
+          <p className="text-gray-500 dark:text-gray-400">{t("followers")}</p>
         </div>
         <div>
           <p className="text-2xl font-bold">{followingCount}</p>
-          <p className="text-gray-500 dark:text-gray-400">Following</p>
+          <p className="text-gray-500 dark:text-gray-400">{t("following")}</p>
         </div>
       </div>
     </div>
