@@ -3,10 +3,12 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import SignInButton from "@/components/SignInButton";
 import SignOutButton from "@/components/SignOutButton";
+import { getTranslations } from "next-intl/server";
 
 export default async function Home() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  const translate = await getTranslations("home");
 
   if (user) {
     const { data: dbUser } = await supabase
@@ -39,11 +41,11 @@ export default async function Home() {
         
         {user ? (
           <>
-            <h1 className="text-3xl font-bold">Вітаємо, {user.user_metadata.full_name}!</h1>
+            <h1 className="text-3xl font-bold">{translate("welcome", { name: user.user_metadata.full_name})}</h1>
             <div className="flex gap-4">
               <form action="/feed">
                 <button className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-700 transition-colors">
-                  Продовжити
+                  {translate("continue")}
                 </button>
               </form>
               <SignOutButton />
@@ -51,7 +53,7 @@ export default async function Home() {
           </>
         ) : (
           <>
-            <h1 className="text-3xl font-bold">Вітаємо!</h1>
+            <h1 className="text-3xl font-bold">{translate("welcomeGuest")}</h1>
             <SignInButton />
           </>
         )}
