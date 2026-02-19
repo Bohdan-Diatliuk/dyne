@@ -1,0 +1,91 @@
+{
+    "home": {
+        "welcome": "Witaj, {name}!",
+        "welcomeGuest": "Witaj!",
+        "continue": "Kontynuuj"
+    },
+    "signin": {
+        "signIn": "Zaloguj się przez Google"
+    },
+    "sidebar": {
+        "home": "Strona główna",
+        "chat": "Czat",
+        "messages": "Wiadomości",
+        "create": "Utwórz",
+        "search": "Szukaj",
+        "profile": "Profil",
+        "settings": "Ustawienia"
+    },
+    "feed": {
+
+    },
+    "chat": {
+        "global": "Czat globalny",
+        "sign": "Zalogowany jako {name}",
+        "exit": "Wyjdź",
+        "messageLoading": "Ładowanie wiadomości...",
+        "messageZero": "Brak wiadomości. Bądź pierwszą osobą, która rozpocznie rozmowę!",
+        "unknown": "Nieznany",
+        "answer": "Odpowiedz",
+        "answerTo": "Odpowiedź do {name}",
+        "enterMessage": "Wpisz wiadomość...",
+        "sending": "Wysyłanie...",
+        "send": "Wyślij"
+    },
+    "messages": {
+
+    },
+    "create": {
+        "header": "Utwórz nowy post",
+        "post": "Co chcesz powiedzieć?",
+        "send": "Opublikuj"
+    },
+    "search": {
+        "title": "Szukaj",
+        "placeholder": "Szukaj po imieniu lub nazwie użytkownika",
+        "searching": "Wyszukiwanie...",
+        "notFound": "Nie znaleziono użytkownika"
+    },
+    "profile": {
+        "post": "Posty",
+        "postCount": "Brak postów"
+    },
+    "profileEditBtn": {
+        "edit": "Edytuj profil"
+    },
+    "profileEdit": {
+        "edit": "Edytuj profil",
+        "changeAvatar": "Kliknij ikonę aparatu, aby zmienić avatar",
+        "name": "Imię",
+        "placeholderName": "Twoje imię",
+        "username": "Nazwa użytkownika",
+        "placeholderUser": "nazwa użytkownika",
+        "rules": "Tylko małe litery, cyfry i myślniki",
+        "bio": "Bio",
+        "placeholderBio": "Opowiedz coś o sobie",
+        "cancel": "Anuluj",
+        "saving": "Zapisywanie...",
+        "save": "Zapisz"
+    },
+    "profileStatus": {
+        "post": "Posty",
+        "followers": "Obserwujący",
+        "following": "Obserwowani"
+    },
+    "button": {
+        "follow": "Obserwuj",
+        "unfollow": "Przestań obserwować"
+    },
+    "settings":  {
+        "setting": "Ustawienia",
+        "appearance": "Wygląd",
+        "theme": "Motyw",
+        "privacy": "Prywatność i bezpieczeństwo",
+        "changePassword": "Zmień hasło",
+        "update": "Aktualizuj",
+        "preference": "Preferencje aplikacji",
+        "language": "Język:",
+        "danger": "Strefa zagrożenia",
+        "delete": "Usuń konto"
+    }
+}
