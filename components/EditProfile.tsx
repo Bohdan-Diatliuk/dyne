@@ -5,6 +5,7 @@ import { Camera, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import  Image from 'next/image';
+import { useTranslations } from "next-intl";
 
 export default function EditProfile({ user, onClose }: EditProfileProps) {
     const [name, setName] = useState(user.name);
@@ -16,6 +17,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
     const [error, setError] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+    const t = useTranslations("profileEdit");
 
     const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
@@ -116,7 +118,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-zinc-800">
-          <h2 className="text-xl font-bold">Edit Profile</h2>
+          <h2 className="text-xl font-bold">{t("edit")}</h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
@@ -157,7 +159,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
             className="hidden"
           />
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            Click camera icon to change avatar
+            {t("changeAvatar")}
           </p>
         </div>
 
@@ -170,7 +172,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
 
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-2">
-              Name
+              {t("name")}
             </label>
             <input
               id="name"
@@ -180,14 +182,14 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
               className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg
                        bg-white dark:bg-zinc-800 text-foreground
                        focus:outline-none focus:ring-2 focus:ring-gray-500"
-              placeholder="Your name"
+              placeholder={t("placeholderName")}
               maxLength={50}
             />
           </div>
 
           <div>
             <label htmlFor="username" className="block text-sm font-medium mb-2">
-              Username
+              {t("username")}
             </label>
             <input 
               id="username"
@@ -197,17 +199,17 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
               className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg
                        bg-white dark:bg-zinc-800 text-foreground
                        focus:outline-none focus:ring-2 focus:ring-gray-500"
-              placeholder="username"
+              placeholder={t("placeholderUser")}
               maxLength={30}
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Only lowercase letters, numbers and hyphens
+              {t("rules")}
             </p>
           </div>
 
           <div>
             <label htmlFor="bio" className="block text-sm font-medium mb-2">
-              Bio
+              {t("bio")}
             </label>
             <textarea
               id="bio"
@@ -217,7 +219,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
                        bg-white dark:bg-zinc-800 text-foreground
                        focus:outline-none focus:ring-2 focus:ring-gray-500
                        resize-none"
-              placeholder="Tell us about yourself"
+              placeholder={t("placeholderBio")}
               rows={4}
               maxLength={160}
             />
@@ -234,7 +236,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
                        hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
               disabled={isLoading}
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="submit"
@@ -243,7 +245,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
                        disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={isLoading || isUploadingAvatar}
             >
-              {isLoading ? 'Saving...' : 'Save'}
+              {isLoading ? t("saving") : t("save")}
             </button>
           </div>
         </form>

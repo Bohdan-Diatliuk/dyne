@@ -8,7 +8,7 @@ import { getTranslations } from "next-intl/server";
 export default async function Home() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  const translate = await getTranslations("home");
+  const t = await getTranslations("home");
 
   if (user) {
     const { data: dbUser } = await supabase
@@ -41,11 +41,11 @@ export default async function Home() {
         
         {user ? (
           <>
-            <h1 className="text-3xl font-bold">{translate("welcome", { name: user.user_metadata.full_name})}</h1>
+            <h1 className="text-3xl font-bold">{t("welcome", { name: user.user_metadata.full_name})}</h1>
             <div className="flex gap-4">
               <form action="/feed">
                 <button className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-700 transition-colors">
-                  {translate("continue")}
+                  {t("continue")}
                 </button>
               </form>
               <SignOutButton />
@@ -53,7 +53,7 @@ export default async function Home() {
           </>
         ) : (
           <>
-            <h1 className="text-3xl font-bold">{translate("welcomeGuest")}</h1>
+            <h1 className="text-3xl font-bold">{t("welcomeGuest")}</h1>
             <SignInButton />
           </>
         )}

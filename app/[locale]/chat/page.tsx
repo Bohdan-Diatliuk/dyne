@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { toast } from 'sonner';
 import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function ChatPage() {
   const [user, setUser] = useState<User | null>(null)
@@ -20,7 +21,8 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const messagesContainerRef = useRef<HTMLDivElement>(null)
   const router = useRouter();
-  const supabase = createClient()
+  const supabase = createClient();
+  const t = useTranslations("chat");
 
   useEffect(() => {
     const getUser = async () => {
@@ -54,7 +56,7 @@ export default function ChatPage() {
     const result = await sendMessage(input, replyTo?.id)
     
     if (result?.error) {
-      toast.error('Помилка відправки: ' + result.error, {
+      toast.error('Sending error: ' + result.error, {
         duration: 4000,
         action: {
           label: 'OK',
@@ -96,16 +98,16 @@ export default function ChatPage() {
     <div className="flex flex-col h-screen max-w-4xl mx-auto">
       <div className="p-4 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold">Global Chat</h1>
+          <h1 className="text-xl font-bold">{t("global")}</h1>
           <p className="text-sm text-gray-400">
-            Увійшли як {user.user_metadata.full_name || user.email}
+            {t("sign", { name: user.user_metadata.full_name || user.email })}
           </p>
         </div>
         <button
           onClick={handleBack}
           className="px-4 py-2 items-end text-sm text-black hover:text-white bg-gray-300 rounded hover:bg-gray-600 transition"
         >
-          Вийти
+          {t("exit")}
         </button>
       </div>
 
@@ -115,12 +117,12 @@ export default function ChatPage() {
       >
         {messagesLoading ? (
           <div className="flex items-center justify-center h-full">
-            <div className="text-gray-500">Завантаження повідомлень...</div>
+            <div className="text-gray-500">{t("messageLoading")}</div>
           </div>
         ) : messages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-gray-500">
-              Поки що немає повідомлень. Будьте першим!
+              {t("messageZero")}
             </div>
           </div>
         ) : (
@@ -161,7 +163,7 @@ export default function ChatPage() {
                     >
                       {!isOwn && (
                         <div className="text-xs font-semibold mb-1 opacity-70">
-                          {message.users?.name || 'Невідомий'}
+                          {message.users?.name || t("unknown")}
                         </div>
                       )}
                       
@@ -170,7 +172,7 @@ export default function ChatPage() {
                             isOwn ? 'border-gray-600 opacity-70' : 'border-gray-400 opacity-60'
                           }`}>
                           <div className="font-semibold">
-                            {message.reply_to.users?.name || 'Невідомий'} :
+                            {message.reply_to.users?.name || t("unknown")} :
                           </div>
                           <div className="truncate">
                             {message.reply_to.content}
@@ -195,7 +197,7 @@ export default function ChatPage() {
                         isOwn ? 'self-end' : 'self-start'
                       }`}
                     >
-                      Відповісти
+                      {t("answer")}
                     </button>
                   </div>
                 </div>
@@ -211,7 +213,7 @@ export default function ChatPage() {
           <div className="mb-2 p-3 bg-gray-800 rounded-lg flex justify-between items-start">
             <div className="flex-1">
               <div className="text-xs font-semibold text-gray-300 mb-1 pb-2 border-b border-gray-500">
-                Відповісти {replyTo.users?.name || 'Невідомий'}
+                  {t("answerTo", { name: replyTo.users?.name || t("unknown")})}
               </div>
               <div className="text-md text-white truncate">
                 {replyTo.content}
@@ -231,7 +233,7 @@ export default function ChatPage() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={replyTo ? `Відповісти ${replyTo.users?.name}...` : "Введіть повідомлення..."}
+            placeholder={replyTo ? t("answerTo", { name: replyTo.users?.name}) : t("enterMessage")}
             disabled={sending}
             className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
@@ -240,7 +242,7 @@ export default function ChatPage() {
             disabled={!input.trim() || sending}
             className="px-6 py-2 bg-gray-600 text-white rounded-lg transition disabled:bg-gray-300 disabled:text-black disabled:cursor-not-allowed"
           >
-            {sending ? 'Відправка...' : 'Відправити'}
+            {sending ? t("sending") : t("send")}
           </button>
         </form>
       </div>

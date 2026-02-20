@@ -1,7 +1,6 @@
 'use client';
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import {
   HomeIcon,
@@ -11,11 +10,12 @@ import {
   UserRound,
   UserRoundCog,
   MessageCircleMore,
-  X
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { UserSide } from "@/types/users.interface";
+import { useTranslations } from "next-intl";
+import SearchPanel from "./SearchPanel";
 
 export default function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -25,6 +25,7 @@ export default function Sidebar() {
   const [isSearching, setIsSearching] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [username, setUsername] = useState<string>('');
+  const t = useTranslations("sidebar");
 
   const supabase = createClient();
 
@@ -40,9 +41,7 @@ export default function Sidebar() {
           .eq('id', user.id)
           .single();
         
-        if (dbUser) {
-          setUsername(dbUser.username);
-        }
+        if (dbUser) setUsername(dbUser.username);
       }
     };
 
@@ -56,19 +55,17 @@ export default function Sidebar() {
   }, []);
 
   const menuItems = [
-    { icon: HomeIcon, label: "Home", href: "/feed" },
-    { icon: MessageCircleMore, label: "Chat", href: "/chat" },
-    { icon: Users, label: "Messages", href: "/messages" },
-    { icon: UserPenIcon, label: "Create", href: "/post/new" },
-    { icon: UserSearchIcon, label: "Search", action: () => setIsSearchOpen(true) },
-    { icon: UserRound, label: "Profile", href: `/profile/${username}` },
-    { icon: UserRoundCog, label: "Settings", href: "/settings" },
+    { icon: HomeIcon, label: t("home"), href: "/feed" },
+    { icon: MessageCircleMore, label: t("chat"), href: "/chat" },
+    { icon: Users, label: t("messages"), href: "/messages" },
+    { icon: UserPenIcon, label: t("create"), href: "/post/new" },
+    { icon: UserSearchIcon, label: t("search"), action: () => setIsSearchOpen(true) },
+    { icon: UserRound, label: t("profile"), href: `/profile/${username}` },
+    { icon: UserRoundCog, label: t("settings"), href: "/settings" },
   ];
 
   useEffect(() => {
-    if (isSearchOpen && searchQuery === "") {
-      loadAllUsers();
-    }
+    if (isSearchOpen && searchQuery === "") loadAllUsers();
   }, [isSearchOpen]);
 
   const loadAllUsers = async () => {
@@ -88,15 +85,8 @@ export default function Sidebar() {
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
-    
-    if (query.trim().length === 0) {
-      loadAllUsers();
-      return;
-    }
-
-    if (query.trim().length < 2) {
-      return;
-    }
+    if (query.trim().length === 0) { loadAllUsers(); return; }
+    if (query.trim().length < 2) return;
 
     setIsSearching(true);
     try {
@@ -121,12 +111,7 @@ export default function Sidebar() {
   return (
     <>
       <div
-        className={`
-          h-screen fixed top-0 left-0 z-30
-          text-foreground
-          transition-all duration-300
-          ${isSidebarOpen ? "w-36" : "w-20"}
-        `}
+        className={`h-screen fixed top-0 left-0 z-30 text-foreground transition-all duration-300 ${isSidebarOpen ? "w-36" : "w-20"}`}
         onMouseEnter={() => setIsSidebarOpen(true)}
         onMouseLeave={() => setIsSidebarOpen(false)}
       >
@@ -137,12 +122,7 @@ export default function Sidebar() {
         <nav className="flex flex-col gap-2 mt-6 px-2">
           {menuItems.map((item) => {
             const Icon = item.icon;
-
-            const baseClasses = `
-              flex items-center p-3 rounded-2xl
-              hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors duration-200
-              relative
-            `;
+            const baseClasses = `flex items-center p-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors duration-200 relative`;
 
             if (item.href) {
               return (
@@ -150,13 +130,7 @@ export default function Sidebar() {
                   <div className="flex items-center justify-center w-6.5 h-6.5 shrink-0">
                     <Icon size={26} />
                   </div>
-                  <span 
-                    className={`
-                      whitespace-nowrap ml-4
-                      transition-opacity duration-300
-                      ${isSidebarOpen ? "opacity-100" : "opacity-0"}
-                    `}
-                  >
+                  <span className={`whitespace-nowrap ml-4 transition-opacity duration-300 ${isSidebarOpen ? "opacity-100" : "opacity-0"}`}>
                     {item.label}
                   </span>
                 </Link>
@@ -164,21 +138,11 @@ export default function Sidebar() {
             }
 
             return (
-              <button
-                key={item.label}
-                onClick={item.action}
-                className={baseClasses}
-              >
+              <button key={item.label} onClick={item.action} className={baseClasses}>
                 <div className="flex items-center justify-center w-6.5 h-6.5 shrink-0">
                   <Icon size={26} />
                 </div>
-                <span 
-                  className={`
-                    whitespace-nowrap ml-4
-                    transition-opacity duration-300
-                    ${isSidebarOpen ? "opacity-100" : "opacity-0"}
-                  `}
-                >
+                <span className={`whitespace-nowrap ml-4 transition-opacity duration-300 ${isSidebarOpen ? "opacity-100" : "opacity-0"}`}>
                   {item.label}
                 </span>
               </button>
@@ -187,86 +151,14 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      {isSearchOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 z-40"
-          onClick={closeSearch}
-        />
-      )}
-
-      <div
-        className={`
-          fixed top-0 right-0 h-full w-96 border-l-2 border-gray-600 bg-black/50 text-foreground shadow-xl z-50
-          transform transition-transform duration-300 ease-in-out
-          ${isSearchOpen ? "translate-x-0" : "translate-x-full"}
-        `}
-      >
-        <div className="p-6 h-full flex flex-col">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">
-              Search
-            </h2>
-            <button
-              onClick={closeSearch}
-              className="text-white hover:text-gray-500"
-            >
-              <X size={20} />
-            </button>
-          </div>
-
-          <input
-            type="text"
-            placeholder="Search by name or username..."
-            value={searchQuery}
-            onChange={(e) => handleSearch(e.target.value)}
-            className="w-full border border-gray-300 dark:border-zinc-700 rounded-lg px-4 py-2 
-                     bg-white dark:bg-zinc-800 text-foreground
-                     focus:outline-none focus:ring-2 focus:ring-blue-500"
-            autoFocus
-          />
-
-          <div className="mt-4 flex-1 overflow-y-auto">
-            {isSearching ? (
-              <div className="text-center text-gray-500 mt-8">
-                Searching...
-              </div>
-            ) : searchResults.length === 0 ? (
-              <div className="text-center text-gray-500 mt-8">
-                No users found
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {searchResults.map((user) => (
-                  <Link
-                    key={user.id}
-                    href={`/profile/${user.username}`}
-                    onClick={closeSearch}
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
-                  >
-                    {user.image ? (
-                      <Image
-                        src={user.image}
-                        alt={user.name || 'User'}
-                        className="rounded-full object-cover"
-                        width={42}
-                        height={42}
-                      />
-                    ) : (
-                      <div className="w-10 h-10 rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center">
-                        <UserRound size={20} />
-                      </div>
-                    )}
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium truncate">{user.name}</p>
-                      <p className="text-sm text-gray-500 truncate">@{user.username}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
+      <SearchPanel
+        isOpen={isSearchOpen}
+        searchQuery={searchQuery}
+        searchResults={searchResults}
+        isSearching={isSearching}
+        onClose={closeSearch}
+        onSearch={handleSearch}
+      />
     </>
   );
 }

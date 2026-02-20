@@ -1,0 +1,91 @@
+{
+    "home": {
+        "welcome": "欢迎, {name}！",
+        "welcomeGuest": "欢迎！",
+        "continue": "继续"
+    },
+    "signin": {
+        "signIn": "使用 Google 登录"
+    },
+    "sidebar": {
+        "home": "首页",
+        "chat": "聊天",
+        "messages": "消息",
+        "create": "创建",
+        "search": "搜索",
+        "profile": "个人资料",
+        "settings": "设置"
+    },
+    "feed": {
+
+    },
+    "chat": {
+        "global": "公共聊天室",
+        "sign": "以 {name} 身份进入",
+        "exit": "退出",
+        "messageLoading": "正在加载消息...",
+        "messageZero": "暂无消息。成为第一个开始对话的人吧！",
+        "unknown": "未知",
+        "answer": "回复",
+        "answerTo": "回复 {name}",
+        "enterMessage": "输入消息...",
+        "sending": "发送中...",
+        "send": "发送"
+    },
+    "messages": {
+
+    },
+    "create": {
+        "header": "创建新帖子",
+        "post": "你想说什么？",
+        "send": "发布"
+    },
+    "search": {
+        "title": "搜索",
+        "placeholder": "按姓名或用户名搜索",
+        "searching": "搜索中...",
+        "notFound": "未找到用户"
+    },
+    "profile": {
+        "post": "帖子",
+        "postCount": "还没有帖子"
+    },
+    "profileEditBtn": {
+        "edit": "编辑资料"
+    },
+    "profileEdit": {
+        "edit": "编辑资料",
+        "changeAvatar": "点击相机图标更换头像",
+        "name": "姓名",
+        "placeholderName": "你的姓名",
+        "username": "用户名",
+        "placeholderUser": "用户名",
+        "rules": "仅允许小写字母、数字和连字符",
+        "bio": "简介",
+        "placeholderBio": "介绍一下你自己",
+        "cancel": "取消",
+        "saving": "保存中...",
+        "save": "保存"
+    },
+    "profileStatus": {
+        "post": "帖子",
+        "followers": "粉丝",
+        "following": "关注"
+    },
+    "button": {
+        "follow": "关注",
+        "unfollow": "取消关注"
+    },
+    "settings":  {
+        "setting": "设置",
+        "appearance": "外观",
+        "theme": "主题",
+        "privacy": "隐私与安全",
+        "changePassword": "修改密码",
+        "update": "更新",
+        "preference": "应用偏好",
+        "language": "语言：",
+        "danger": "危险区域",
+        "delete": "删除账户"
+    }
+}
