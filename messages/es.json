@@ -33,7 +33,10 @@
         "send": "Enviar"
     },
     "messages": {
-
+        "sms": "Mensajes",
+        "loading": "Cargando...",
+        "withoutChat": "No hay chats",
+        "send": "Enviar"
     },
     "create": {
         "header": "Crear una nueva publicación",

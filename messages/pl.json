@@ -33,7 +33,11 @@
         "send": "Wyślij"
     },
     "messages": {
-
+        "sms": "Wiadomości",
+        "loading": "Ładowanie...",
+        "withoutChat": "Brak czatów",
+        "writeSms": "Napisz wiadomość",
+        "send": "Wyślij"
     },
     "create": {
         "header": "Utwórz nowy post",
