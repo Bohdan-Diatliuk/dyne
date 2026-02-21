@@ -8,12 +8,12 @@ export const metadata: Metadata = {
 
 export default function MessagesLayout ({ children }: { children: React.ReactNode }) {
     return (
-    <main>
+    <div className="flex min-h-screen">
         <Sidebar />
-        <div>
+        <main className="flex-1">
             {children}
-        </div>
+        </main>
         <MainEffect words={['badabum']} />
-    </main>
+    </div>
     ) 
 }

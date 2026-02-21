@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState, useRef } from 'react'
-import { createClient } from '@/lib/supabase/client'  // ← важливо: саме так як в глобальному
+import { createClient } from '@/lib/supabase/client'
 
 export function usePrivateChat(otherUserId: string) {
-  const supabase = createClient()  // ← створюємо всередині як в useRealtimeChat
+  const supabase = createClient()
   const [roomId, setRoomId] = useState<string | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [messages, setMessages] = useState<any[]>([])
@@ -16,7 +16,7 @@ export function usePrivateChat(otherUserId: string) {
     supabase
       .rpc('get_or_create_private_room', { other_user_id: otherUserId })
       .then(({ data, error }) => {
-        console.log('Room:', data, error)  // ← додай щоб побачити чи room створюється
+        console.log('Room:', data, error)
         setRoomId(data)
       })
   }, [otherUserId])
@@ -30,7 +30,7 @@ export function usePrivateChat(otherUserId: string) {
       .eq('room_id', roomId)
       .order('created_at', { ascending: true })
       .then(({ data, error }) => {
-        console.log('Messages:', data, error)  // ← перевір чи є помилка
+        console.log('Messages:', data, error)
         setMessages(data ?? [])
         setLoading(false)
       })
@@ -75,7 +75,7 @@ export function usePrivateChat(otherUserId: string) {
       content,
     })
 
-    if (error) console.error('Send error:', error)  // ← побачиш конкретну помилку
+    if (error) console.error('Send error:', error)
   }
 
   return { messages, sendMessage, roomId, loading }

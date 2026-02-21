@@ -6,6 +6,7 @@ import FollowButton from "@/components/FollowButton";
 import EditProfileBtn from "@/components/EditProfileBtn";
 import ProfileStats from "@/components/ProfileStats";
 import { getTranslations } from "next-intl/server";
+import  MessageButton  from '@/components/MessageButton';
 
 export default async function ProfilePage({
     params
@@ -92,11 +93,15 @@ export default async function ProfilePage({
                                 avatar_url: user.avatar_url
                             }} />
                         ) : (
+                            <div>
+
                             <FollowButton 
                                 userId={user.id}
                                 initialIsFollowing={isFollowing}
                                 initialFollowers={followersCount || 0}
-                            />
+                                />
+                            <MessageButton otherUserId={user.id} />
+                            </div>
                         )}
                     </div>
                 </div>
