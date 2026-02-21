@@ -34,7 +34,11 @@
 
     },
     "messages": {
-
+        "sms": "Message",
+        "loading": "Loading...",
+        "withoutChat": "No chats",
+        "writeSms": "Write a message...",
+        "send": "Send"
     },
     "create": {
         "header": "Create a New Post",
