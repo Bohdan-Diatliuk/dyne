@@ -11,8 +11,7 @@ export default async function FeedPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Feed</h1>
-      <p>Вітаємо, {user.user_metadata.full_name}!</p>
+      <p className="flex flex-col items-center" >Вітаємо, {user.user_metadata.full_name}!</p>
     </div>
   );
 }
