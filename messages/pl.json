@@ -37,7 +37,8 @@
         "loading": "Ładowanie...",
         "withoutChat": "Brak czatów",
         "writeSms": "Napisz wiadomość",
-        "send": "Wyślij"
+        "send": "Wyślij",
+        "exit": "Wyjdź"
     },
     "create": {
         "header": "Utwórz nowy post",

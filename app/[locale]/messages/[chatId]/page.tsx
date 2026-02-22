@@ -5,6 +5,7 @@ import { usePrivateChat } from "@/hooks/usePrivateChat"
 import { useEffect, useRef, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 
 export default function MessPage({ params }: { params: Promise<{ chatId: string }> }) {
   const { chatId } = use(params);
@@ -13,6 +14,7 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
   const [sending, setSending] = useState(false);
   const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const t = useTranslations("messages");
 
   useEffect(() => {
@@ -34,8 +36,21 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
     setSending(false)
   };
 
+  const handleBack = () => {
+    router.push('/feed');
+  }
+
   return (
     <div className="flex flex-col h-screen max-w-2xl mx-auto p-4">
+      <div className="flex justify-end w-full">
+        <button
+          onClick={handleBack}
+          className="px-4 py-2 text-sm text-black hover:text-white bg-gray-300 rounded hover:bg-gray-600 transition"
+          >
+          {t("exit")}
+        </button>
+      </div>
+
       <div className="flex-1 overflow-y-auto flex flex-col gap-2 py-4">
         {loading && <p className="text-zinc-400 text-center">{t("loading")}</p>}
         {messages.map((msg) => {
@@ -66,7 +81,7 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
         <button
           onClick={handleSend}
           disabled={sending}
-          className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white px-4 py-2 rounded-xl text-sm transition-colors"
+          className="bg-gray-600 hover:bg-gray-700 disabled:opacity-50 text-white px-4 py-2 rounded-xl text-sm transition-colors"
         >
           {sending ? '...' : t("send")}
         </button>

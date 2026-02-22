@@ -37,7 +37,8 @@
         "loading": "加载中",
         "withoutChat": "没有聊天",
         "writeSms": "写消息",
-        "send": "发送"
+        "send": "发送",
+        "exit": "退出"
     },
     "create": {
         "header": "创建新帖子",

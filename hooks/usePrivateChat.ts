@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useState, useRef } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 export function usePrivateChat(otherUserId: string) {
-  const supabase = createClient()
-  const [roomId, setRoomId] = useState<string | null>(null)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [messages, setMessages] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const supabase = useRef(createClient()).current;
+  const [roomId, setRoomId] = useState<string | null>(null);
+  const [messages, setMessages] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!otherUserId) return
@@ -19,7 +19,7 @@ export function usePrivateChat(otherUserId: string) {
         console.log('Room:', data, error)
         setRoomId(data)
       })
-  }, [otherUserId])
+  }, [otherUserId]);
 
   useEffect(() => {
     if (!roomId) return
@@ -33,7 +33,7 @@ export function usePrivateChat(otherUserId: string) {
         console.log('Messages:', data, error)
         setMessages(data ?? [])
         setLoading(false)
-      })
+      });
 
     const channel = supabase
       .channel(`private_room:${roomId}`)
@@ -75,7 +75,9 @@ export function usePrivateChat(otherUserId: string) {
       content,
     })
 
-    if (error) console.error('Send error:', error)
+    if (error) {
+      console.error('Send error:', error.message, error.code, error.details, error.hint)
+    }
   }
 
   return { messages, sendMessage, roomId, loading }
