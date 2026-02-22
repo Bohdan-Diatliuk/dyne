@@ -36,7 +36,8 @@
         "sms": "Mensajes",
         "loading": "Cargando...",
         "withoutChat": "No hay chats",
-        "send": "Enviar"
+        "send": "Enviar",
+        "exit": "Salir"
     },
     "create": {
         "header": "Crear una nueva publicación",

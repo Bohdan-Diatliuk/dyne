@@ -38,7 +38,8 @@
         "loading": "Loading...",
         "withoutChat": "No chats",
         "writeSms": "Write a message...",
-        "send": "Send"
+        "send": "Send",
+        "exit": "Exit"
     },
     "create": {
         "header": "Create a New Post",
