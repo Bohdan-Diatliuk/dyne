@@ -17,7 +17,8 @@
         "settings": "Ustawienia"
     },
     "feed": {
-
+        "welcome": "Witaj, {name}!",
+        "noPosts": "Na razie nic tu nie ma. Obserwuj użytkowników lub stwórz własny post."
     },
     "chat": {
         "global": "Czat globalny",

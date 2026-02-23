@@ -1,18 +1,39 @@
-import { PostCardProps } from "@/types/post.types";
+import { PostCardProps } from "@/types/post.interface";
+import Image from "next/image";
 import Link from "next/link";
 
-export default function PostCard({ createdAt, author, content }: PostCardProps) {
-    const date = new Date(createdAt).toLocaleDateString('uk-UA');
+export default function PostCard({ createdAt, author, authorName, content, avatarUrl }: PostCardProps) {
+    const date = new Date(createdAt).toLocaleDateString('uk-UA', {
+        hour: '2-digit',
+        minute: '2-digit',
+    });
 
     return (
-        <div className="flex flex-col w-full max-w-xl p-4">
-            <span className="text-2xl text-gray-50 px-5 mb-2">
-                <Link href={`/profile/${author}`} className="hover:text-gray-400">
-                    {author}
-                </Link>
-            </span>
-            <p className="text-gray-50 m-2 p-4 border border-gray-400 rounded-2xl">{content}</p>
-            <h4 className="text-sm text-gray-400 self-end px-5">{date}</h4>
+        <div className="w-full max-w-lg">
+            <div className="bg-zinc-900 w-full min-w-0 rounded-xl p-2 hover:bg-zinc-800 transition-colors">
+                <div className="flex items-center gap-3 px-4 pt-3">
+                    {avatarUrl ? (
+                        <Image
+                            src={avatarUrl}
+                            className="w-9 h-9 rounded-full object-cover"
+                            alt={authorName}
+                            width={36}
+                            height={36}
+                        />
+                    ) : (
+                        <div className="w-9 h-9 rounded-full bg-zinc-700 flex items-center justify-center text-sm">
+                            {authorName.charAt(0).toUpperCase()}
+                        </div>
+                    )}
+                    <Link href={`/profile/${author}`} className="font-medium hover:text-zinc-400 transition-colors">
+                        @{authorName}
+                    </Link>
+                </div>
+                <p className="px-4 mx-2 mt-2 py-2 border border-zinc-700 rounded-xl text-sm text-zinc-300">
+                    {content}
+                </p>
+                <h4 className="flex flex-col items-end m-2 text-xs text-zinc-500">{date}</h4>
+            </div>
         </div>
     );
 }
