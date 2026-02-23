@@ -35,6 +35,11 @@
     },
     "messages": {
         "sms": "消息",
+        "messageZero": "暂无消息。成为第一个开始对话的人吧！",
+        "unknown": "未知",
+        "answer": "回复",
+        "answerTo":"回复 {name}",
+        "sending": "发送中...",
         "loading": "加载中",
         "withoutChat": "没有聊天",
         "writeSms": "写消息",

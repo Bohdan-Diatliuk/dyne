@@ -17,7 +17,7 @@ export default async function RedirectPage() {
         .single();
 
     if (!dbUser?.username) {
-        redirect('/');
+        redirect('/feed');
         return null;
     }
 

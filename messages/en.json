@@ -36,6 +36,11 @@
     },
     "messages": {
         "sms": "Message",
+        "messageZero": "No messages yet. Be the first to start a conversation!",
+        "unknown": "Unknown",
+        "answer": "Answer",
+        "answerTo":"Answer to {name}",
+        "sending": "Sending...",
         "loading": "Loading...",
         "withoutChat": "No chats",
         "writeSms": "Write a message...",

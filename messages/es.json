@@ -35,6 +35,11 @@
     },
     "messages": {
         "sms": "Mensajes",
+        "messageZero": "Aún no hay mensajes. ¡Sé el primero en iniciar la conversación!",
+        "unknown": "Desconocido",
+        "answer": "Responder",
+        "answerTo":"Responder a {name}",
+        "sending": "Enviando...",
         "loading": "Cargando...",
         "withoutChat": "No hay chats",
         "send": "Enviar",

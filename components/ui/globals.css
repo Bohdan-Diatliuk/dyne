@@ -45,6 +45,15 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-section: var(--section);
+  --color-section-hover: var(--section-hover);
+  --color-main-text: var(--main-text);
+  --color-secondary-text: var(--secondary-text);
+  --color-sms-back: var(--sms-back);
+  --color-sms-backTo: var(--sms-backTo);
+  --color-btn-click: var(--btn-click);
+  --color-btn-hover: var(--btn-hover); 
 }
 
 ::-webkit-scrollbar {
@@ -120,18 +129,45 @@
   --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+
+  --section: #18181b;
+  --section-hover: ;
+  --main-text: #fff;
+  --secondary-text:
+  --sms-back:
+  --sms-backTo:
+  --btn-click:
+  --btn-hover:
 }
 
-.ocean {
-  --background: oklch(35.527% 0.11316 25.01);
+.theme-ocean {
+  --background: #0c0c23;
   --foreground: oklch(53.618% 0.02952 18);
   --primary: oklch(59.072% 0.02794 229.567);
+
+  --section: #161e32;
+  --section-hover: #0d142a;
+  --main-text: #E2E8F0;
+  --secondary-text: #7c7f82;
+  --sms-back:
+  --sms-backTo:
+  --btn-click:
+  --btn-hover:
 }
 
-.sunset {
-  --background: oklch(0.12 0.03 20);
+.theme-sunset {
+  --background: #312E81;
   --foreground: oklch(0.95 0.01 20);
   --primary: oklch(0.7 0.25 30);
+
+  --section: #312E81;
+  --section-hover: ;
+  --main-text: #F8FAFC;
+  --secondary-text:
+  --sms-back:
+  --sms-backTo:
+  --btn-click:
+  --btn-hover: 
 }
 
 @layer base {

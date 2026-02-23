@@ -51,7 +51,7 @@ export default async function FeedPage() {
 
       <div className="flex flex-col items-center gap-4">
         {posts.length === 0 ? (
-          <p className="text-gray-400 mt-10">
+          <p className="text-main-text mt-10">
             {t("noPosts")}
           </p>
         ) : (

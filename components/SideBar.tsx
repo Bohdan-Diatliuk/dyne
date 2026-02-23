@@ -98,7 +98,7 @@ export default function Sidebar() {
   return (
     <>
       <div
-        className={`h-screen fixed top-0 left-0 z-30 text-foreground transition-all duration-300 hidden md:block ${isSidebarOpen ? "w-36" : "w-20"}`}
+        className={`h-screen fixed top-0 left-0 z-30 text-main-text transition-all duration-300 hidden md:block ${isSidebarOpen ? "w-36" : "w-20"}`}
         onMouseEnter={() => setIsSidebarOpen(true)}
         onMouseLeave={() => setIsSidebarOpen(false)}
       >
@@ -121,7 +121,7 @@ export default function Sidebar() {
               );
             }
             return (
-              <button key={item.label} onClick={item.action} className={baseClasses}>
+              <button key={item.label} onClick={item.action} className={baseClasses} suppressHydrationWarning >
                 <div className="flex items-center justify-center w-6.5 h-6.5 shrink-0">
                   <Icon size={26} />
                 </div>

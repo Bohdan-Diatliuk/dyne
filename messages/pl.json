@@ -35,10 +35,15 @@
     },
     "messages": {
         "sms": "Wiadomości",
+        "messageZero": "Brak wiadomości. Bądź pierwszą osobą, która rozpocznie rozmowę!",
         "loading": "Ładowanie...",
+        "unknown": "Nieznany",
+        "answer": "Odpowiedz",
+        "answerTo": "Odpowiedź do {name}",
         "withoutChat": "Brak czatów",
         "writeSms": "Napisz wiadomość",
         "send": "Wyślij",
+        "sending": "Wysyłanie...",
         "exit": "Wyjdź"
     },
     "create": {
