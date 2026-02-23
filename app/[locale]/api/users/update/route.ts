@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { createUsername } from "@/utils/createUsername";
 
 export async function PUT(req: NextRequest) {
     try {
@@ -31,12 +30,23 @@ export async function PUT(req: NextRequest) {
         };
 
         if (username) {
-            const generatedUsername = createUsername(username);
+            const cleanUsername = username
+                .toLowerCase()
+                .replace(/[^a-z0-9-]/g, '')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
+
+            if (!cleanUsername || cleanUsername.length < 3) {
+                return NextResponse.json(
+                    { error: "Username must contain at least 3 latin characters" },
+                    { status: 400 }
+                );
+            }
 
             const { data: existingUser, error: checkError } = await supabase
                 .from("users")
                 .select("id")
-                .eq("username", generatedUsername)
+                .eq("username", cleanUsername)
                 .neq("id", user.id)
                 .maybeSingle();
 
@@ -54,7 +64,7 @@ export async function PUT(req: NextRequest) {
                 );
             }
 
-            updateData.username = generatedUsername;
+            updateData.username = cleanUsername;
         }
 
         const { data, error } = await supabase
