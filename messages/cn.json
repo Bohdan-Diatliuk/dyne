@@ -17,7 +17,8 @@
         "settings": "设置"
     },
     "feed": {
-
+        "welcome":"欢迎, {name}！",
+        "noPosts": "這裡目前還沒有任何內容。請訂閱用戶或創建您自己的貼文。"
     },
     "chat": {
         "global": "公共聊天室",

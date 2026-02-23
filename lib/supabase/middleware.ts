@@ -27,9 +27,27 @@ export async function updateSession(request: NextRequest) {
     }
   )
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  let user = null
+
+  try {
+    const { data, error } = await supabase.auth.getUser()
+
+    if (error?.code === 'refresh_token_not_found') {
+      const response = NextResponse.next({ request })
+
+      request.cookies.getAll().forEach((cookie) => {
+        if (cookie.name.startsWith('sb-') || cookie.name.includes('supabase')) {
+          response.cookies.delete(cookie.name)
+        }
+      })
+
+      return { supabase, user: null, response }
+    }
+
+    user = data.user
+  } catch (err) {
+    console.error('Unexpected authorization error in middleware:', err)
+  }
 
   return { supabase, user, response: supabaseResponse }
 }

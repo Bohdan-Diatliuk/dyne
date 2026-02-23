@@ -17,7 +17,8 @@
         "settings": "Configuración"
     },
     "feed": {
-
+        "welcome":"¡Bienvenido, {name}!",
+        "noPosts": "Aquí todavía no hay nada. Suscríbete a los usuarios o crea tu propia publicación."
     },
     "chat": {
         "global": "Chat global",
