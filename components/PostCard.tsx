@@ -10,7 +10,7 @@ export default function PostCard({ createdAt, author, authorName, content, avata
 
     return (
         <div className="w-full max-w-lg">
-            <div className="bg-zinc-900 w-full min-w-0 rounded-xl p-2 hover:bg-zinc-800 transition-colors">
+            <div className="bg-section w-full min-w-0 rounded-xl p-2 hover:bg-section-hover transition-colors">
                 <div className="flex items-center gap-3 px-4 pt-3">
                     {avatarUrl ? (
                         <Image
@@ -25,14 +25,14 @@ export default function PostCard({ createdAt, author, authorName, content, avata
                             {authorName.charAt(0).toUpperCase()}
                         </div>
                     )}
-                    <Link href={`/profile/${author}`} className="font-medium hover:text-zinc-400 transition-colors">
+                    <Link href={`/profile/${author}`} className="text-main-text font-medium hover:text-zinc-400 transition-colors">
                         @{authorName}
                     </Link>
                 </div>
-                <p className="px-4 mx-2 mt-2 py-2 border border-zinc-700 rounded-xl text-sm text-zinc-300">
+                <p className="px-4 mx-2 mt-2 py-2 border border-zinc-700 rounded-xl text-sm text-secondary-text">
                     {content}
                 </p>
-                <h4 className="flex flex-col items-end m-2 text-xs text-zinc-500">{date}</h4>
+                <h4 className="flex flex-col items-end m-2 text-xs text-secondary-text">{date}</h4>
             </div>
         </div>
     );

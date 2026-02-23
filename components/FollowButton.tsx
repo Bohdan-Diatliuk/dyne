@@ -73,7 +73,7 @@ export default function FollowButton({
   };
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 mr-2">
       <button
         onClick={handleFollow}
         disabled={isLoading}

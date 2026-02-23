@@ -6,11 +6,11 @@ export default async function SettingsPage() {
   const t = await getTranslations("settings");
 
     return (
-    <div className="max-w-3xl mx-auto my-8 space-y-8">
+    <div className="max-w-3xl mx-auto my-8 space-y-8 text-main-text">
 
       <h1 className="text-3xl font-bold">{t("setting")}</h1>
 
-      <section className="bg-zinc-900 p-6 rounded-xl space-y-4">
+      <section className="bg-section p-6 rounded-xl space-y-4">
         <h2 className="text-lg font-semibold">{t("appearance")}</h2>
 
         <div className="flex items-center justify-between">
@@ -19,7 +19,7 @@ export default async function SettingsPage() {
         </div>
       </section>
 
-      <section className="bg-zinc-900 p-6 rounded-xl space-y-4">
+      <section className="bg-section p-6 rounded-xl space-y-4">
         <h2 className="text-lg font-semibold">{t("privacy")}</h2>
 
         <div className="flex items-center justify-between">
@@ -30,7 +30,7 @@ export default async function SettingsPage() {
         </div>
       </section>
 
-      <section className="bg-zinc-900 p-6 rounded-xl space-y-4">
+      <section className="bg-section p-6 rounded-xl space-y-4">
         <h2 className="text-lg font-semibold">{t("preference")}</h2>
 
         <div className="flex items-center justify-between">
@@ -39,7 +39,7 @@ export default async function SettingsPage() {
         </div>
       </section>
 
-      <section className="bg-zinc-900 p-6 rounded-xl border border-red-500 space-y-4">
+      <section className="bg-section p-6 rounded-xl border border-red-500 space-y-4">
         <h2 className="text-lg font-semibold text-red-500">
           {t("danger")}
         </h2>

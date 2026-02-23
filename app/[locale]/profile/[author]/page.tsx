@@ -59,7 +59,7 @@ export default async function ProfilePage({
 
     return (
         <div className="max-w-4xl mx-auto p-6">
-            <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-8 mb-6">
+            <div className="bg-section rounded-lg shadow-lg p-8 mb-6">
                 <div className="flex items-center gap-6">
                     {user.avatar_url ? (
                         <Image
@@ -93,8 +93,7 @@ export default async function ProfilePage({
                                 avatar_url: user.avatar_url
                             }} />
                         ) : (
-                            <div>
-
+                            <div className="flex flex-row">
                             <FollowButton 
                                 userId={user.id}
                                 initialIsFollowing={isFollowing}
@@ -113,7 +112,7 @@ export default async function ProfilePage({
                 />
             </div>
 
-            <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-lg p-8">
+            <div className="bg-section rounded-lg shadow-lg p-8">
                 <h2 className="text-xl font-bold mb-4">{t("post")}</h2>
                 <div className="text-center text-gray-500 dark:text-gray-400 py-12">
                     {t("postCount")}

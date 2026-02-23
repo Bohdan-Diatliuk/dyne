@@ -20,7 +20,7 @@ export default function ChatCard({ roomId, otherUser, lastMessage }: ChatCardPro
 
     return (
     <Link href={`/messages/${otherUser?.id}`} className="w-full max-w-lg overflow-hidden">
-      <div className="bg-zinc-900 w-full min-w-0 rounded-xl p-2 hover:bg-zinc-800 transition-colors cursor-pointer">
+      <div className="bg-section w-full min-w-0 rounded-xl p-2 hover:bg-section-hover transition-colors cursor-pointer">
         <div className="flex items-center gap-3 px-4 pt-3">
           {otherUser?.avatar_url ? (
             <Image
