@@ -10,7 +10,7 @@ export default function MessagesLayout ({ children }: { children: React.ReactNod
     return (
     <div className="flex min-h-screen">
         <Sidebar />
-        <main className="flex-1">
+        <main className="flex-1 md:ml-20 min-w-0">
             {children}
         </main>
         <MainEffect words={['badabum']} />
