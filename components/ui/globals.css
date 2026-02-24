@@ -140,18 +140,40 @@
   --section: #18181b;
   --section-hover: #070707;
   --main-text: #fff;
-  --main-fr: #111;
+  --main-fr: #000000;
   --secondary-text: #727f82;
-  --btn-click: #18181b;
-  --btn-hover: ;
-  --btn-follow: ;
-  --btn-unfollow: ;
-  --btn-unfollow-h: ;
-  --bg-input: ;
-  --border: oklch(22.816% 0.00769 285.734);
-  --chat-own: ;
-  --chat-fr: ;
+  --btn-click: #232230;
+  --btn-hover: #6e6e75;
+  --btn-follow: #242432;
+  --btn-unfollow: #1f1f27;
+  --btn-unfollow-h: #7d4440;
+  --bg-input: #131317;
+  --border: oklch(57.262% 0.01527 285.853);
+  --chat-own: #07070a;
+  --chat-fr: #67676e;
   --particle: ;
+}
+
+.theme-light {
+  --background: #fff;
+  --foreground: oklch(15.434% 0.00002 271.152);
+  --primary: oklch(59.072% 0.02794 229.567);
+
+  --section: #c2c2c2;
+  --section-hover: #e3e4e4;
+  --main-text: #2b2b2b;
+  --main-fr: #111;
+  --secondary-text: #7c7f82;
+  --btn-click: #b0b0b1;
+  --btn-hover: rgb(210, 217, 232);
+  --btn-follow: #d5cfc8d1;
+  --btn-unfollow: #d0c7c3;
+  --btn-unfollow-h: rgb(248, 239, 231);
+  --border: #afafb0; 
+  --bg-input: #dadae595;
+  --chat-own: #dcdfe6;
+  --chat-fr: rgb(252, 252, 252);
+  --particle: #111;
 }
 
 .theme-ocean {
@@ -177,24 +199,46 @@
 }
 
 .theme-sunset {
-  --background: #312E81;
+  --background: #b5590e;
   --foreground: oklch(0.95 0.01 20);
   --primary: oklch(0.7 0.25 30);
 
-  --section: #312E81;
-  --section-hover: ;
-  --main-text: #F8FAFC;
-  --main-fr: #F8FAFC;
-  --secondary-text:
-  --btn-click:
-  --btn-hover:
-  --btn-follow: ;
-  --btn-unfollor: ;
-  --btn-unfollow-h: ;
-  --border: ;
-  --bg-input: ;
-  --chat-own: ;
-  --chat-fr: ;
+  --section: #956b2c;
+  --section-hover: rgb(131, 84, 12);
+  --main-text: rgb(0, 0, 0);
+  --main-fr: #000000;
+  --secondary-text: #3f3932;
+  --btn-click: #d88525;
+  --btn-hover: #76490b;
+  --btn-follow: #d19a10;
+  --btn-unfollow: #e19315;
+  --btn-unfollow-h: #f58d25;
+  --border: #6e3602;
+  --bg-input: #986a20;
+  --chat-own: #ac6f2a;
+  --chat-fr: #db9d56;
+  --particle: #111;
+}
+
+.theme-forest {
+  --background: #075513;
+  --foreground: oklch(100% 0.00011 271.152);
+  --primary: oklch(0.7 0.25 30);
+
+  --section: #07622a;
+  --section-hover: rgb(5, 124, 17);
+  --main-text: rgb(255, 255, 255);
+  --main-fr: #000000;
+  --secondary-text: #aabda5;
+  --btn-click: #1fc210;
+  --btn-hover: #23940d;
+  --btn-follow: #5cc411;
+  --btn-unfollow: #589e0e;
+  --btn-unfollow-h: #11810f;
+  --border: #008000;
+  --bg-input: #3f922b;
+  --chat-own: #00af20f3;
+  --chat-fr: #32ff7a;
   --particle: ;
 }
 

@@ -9,13 +9,15 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-const themes = ["dark", "theme-ocean", "theme-sunset"] as const
+const themes = ["dark", "theme-light","theme-ocean", "theme-sunset", "theme-forest"] as const
 type Theme = typeof themes[number]
 
 const themeLabels: Record<Theme, string> = {
   "dark": "Dark",
+  "theme-light": "Light",
   "theme-ocean": "Ocean",
   "theme-sunset": "Sunset",
+  "theme-forest": "Forest",
 }
 
 export default function ThemeSwitch() {
