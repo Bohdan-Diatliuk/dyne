@@ -23,6 +23,7 @@ export default function ThemeSwitch() {
 
   useEffect(() => {
     const saved = (localStorage.getItem("theme") as Theme) ?? "dark"
+    document.documentElement.classList.remove(...themes)
     document.documentElement.classList.add(saved)
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(saved)
