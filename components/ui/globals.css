@@ -49,11 +49,18 @@
   --color-section: var(--section);
   --color-section-hover: var(--section-hover);
   --color-main-text: var(--main-text);
+  --color-main-fr: var(--main-fr);
   --color-secondary-text: var(--secondary-text);
-  --color-sms-back: var(--sms-back);
-  --color-sms-backTo: var(--sms-backTo);
   --color-btn-click: var(--btn-click);
   --color-btn-hover: var(--btn-hover); 
+  --color-border: var(--border);
+  --color-bg-input: var(--bg-input);
+  --color-btn-follow: var(--btn-follow);
+  --color-btn-unfollow: var(--btn-unfollow);
+  --color-btn-unfollow-h: var(--btn-unfollow-h);
+  --color-chat-own: var(--chat-own);
+  --color-chat-fr: var(--chat-fr);
+  --color-particle: var(--particle);
 }
 
 ::-webkit-scrollbar {
@@ -131,13 +138,20 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 
   --section: #18181b;
-  --section-hover: ;
+  --section-hover: #070707;
   --main-text: #fff;
-  --secondary-text:
-  --sms-back:
-  --sms-backTo:
-  --btn-click:
-  --btn-hover:
+  --main-fr: #111;
+  --secondary-text: #727f82;
+  --btn-click: #18181b;
+  --btn-hover: ;
+  --btn-follow: ;
+  --btn-unfollow: ;
+  --btn-unfollow-h: ;
+  --bg-input: ;
+  --border: oklch(22.816% 0.00769 285.734);
+  --chat-own: ;
+  --chat-fr: ;
+  --particle: ;
 }
 
 .theme-ocean {
@@ -148,11 +162,18 @@
   --section: #161e32;
   --section-hover: #0d142a;
   --main-text: #E2E8F0;
+  --main-fr: #111;
   --secondary-text: #7c7f82;
-  --sms-back:
-  --sms-backTo:
-  --btn-click:
-  --btn-hover:
+  --btn-click: #425176;
+  --btn-hover: rgb(35, 46, 71);
+  --btn-follow: #668be8;
+  --btn-unfollow: #293861;
+  --btn-unfollow-h: rgb(72, 60, 200);
+  --border: #3f3f62; 
+  --bg-input: #2b2b5f95;
+  --chat-own: #485983;
+  --chat-fr: rgb(180, 180, 234);
+  --particle: #fff;
 }
 
 .theme-sunset {
@@ -163,11 +184,18 @@
   --section: #312E81;
   --section-hover: ;
   --main-text: #F8FAFC;
+  --main-fr: #F8FAFC;
   --secondary-text:
-  --sms-back:
-  --sms-backTo:
   --btn-click:
-  --btn-hover: 
+  --btn-hover:
+  --btn-follow: ;
+  --btn-unfollor: ;
+  --btn-unfollow-h: ;
+  --border: ;
+  --bg-input: ;
+  --chat-own: ;
+  --chat-fr: ;
+  --particle: ;
 }
 
 @layer base {

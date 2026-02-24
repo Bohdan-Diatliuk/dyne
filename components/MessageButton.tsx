@@ -3,9 +3,11 @@
 import { useRouter } from "next/navigation";
 import { MessageCircle } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { useTranslations } from "next-intl";
 
 export default function MessageButton({ otherUserId }: { otherUserId: string }) {
   const router = useRouter();
+  const t = useTranslations("messages");
 
   const handleClick = async () => {
     const supabase = createClient();
@@ -18,10 +20,10 @@ export default function MessageButton({ otherUserId }: { otherUserId: string }) 
   return (
     <button
       onClick={handleClick}
-      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white text-sm transition-colors"
+      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-btn-click hover:bg-btn-hover text-main-text font-medium transition-colors"
     >
       <MessageCircle size={16} />
-      Написати
+      {t("write")}
     </button>
   );
 }

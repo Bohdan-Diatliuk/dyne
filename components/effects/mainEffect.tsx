@@ -7,8 +7,19 @@ import type { Container } from "@tsparticles/engine";
 import { useEffect, useState, useCallback } from "react";
 import { ParticleEffectProps } from "../../types/particles.interface";
 
+function resolveCssVar(value: string): string {
+  if (!value.startsWith("var(")) return value;
+  
+  const varName = value.match(/var\((--[^)]+)\)/)?.[1];
+  if (!varName) return value;
+  
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue(varName)
+    .trim() || "#ffffff";
+}
+
 export default function MainEffect({
-  color = "#fff",
+  color = "var(--particle)",
   words = ["DYNE", "CHAT", "SOCIAL", "NETWORK"],
   moveSpeed = 2,
   numberCount = 100,
@@ -19,6 +30,7 @@ export default function MainEffect({
   zIndex = -1,
  }: ParticleEffectProps) {
   const [init, setInit] = useState(false);
+  const [resolvedColor, setResolvedColor] = useState("#fff");
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -29,6 +41,19 @@ export default function MainEffect({
     });
   }, []);
 
+  useEffect(() => {
+    const resolve = () => setResolvedColor(resolveCssVar(color));
+    
+    resolve();
+
+    const observer = new MutationObserver(resolve);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+  });
+
+    return () => observer.disconnect();
+  }, [color]);
   const particlesLoaded = useCallback(async (container?: Container) => {
     console.log(container);
   }, []);
@@ -39,6 +64,7 @@ export default function MainEffect({
   
   return (
     <Particles
+      key={resolvedColor}
       id={`tsparticles`}
       particlesLoaded={particlesLoaded}
       options={{
@@ -50,7 +76,7 @@ export default function MainEffect({
         fpsLimit: 600,
         particles: {
           color: {
-            value: color,
+            value: resolvedColor,
           },
           move: {
             direction: "bottom",

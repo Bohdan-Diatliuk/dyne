@@ -115,13 +115,13 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
     };
 
     return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-zinc-800">
-          <h2 className="text-xl font-bold">{t("edit")}</h2>
+    <div className="fixed inset-0 bg-background/70 flex items-center justify-center z-50 p-4">
+      <div className="bg-section rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+        <div className="flex items-center justify-between p-6 border-b border-border">
+          <h2 className="text-xl text-main-text font-bold">{t("edit")}</h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+            className="text-main-text hover:text-border"
           >
             <X size={24} />
           </button>
@@ -138,15 +138,15 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
                 className="rounded-full object-cover"
               />
             ) : (
-              <div className="w-30 h-30 rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center">
-                <Camera size={40} className="text-gray-500" />
+              <div className="w-30 h-30 rounded-full bg-section-hover flex items-center justify-center">
+                <Camera size={40} className="text-main-text hover:text-secondary-text" />
               </div>
             )}
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={isUploadingAvatar}
-              className="absolute bottom-0 right-0 p-2 bg-gray-600 text-white rounded-full hover:bg-gray-300 hover:text-black transition-colors disabled:opacity-50"
+              className="absolute bottom-0 right-0 p-2 bg-section-hover text-main-text rounded-full hover:bg-border transition-colors disabled:opacity-50"
             >
               {isUploadingAvatar ? '...' : <Camera size={20} />}
             </button>
@@ -158,7 +158,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
             onChange={handleAvatarChange}
             className="hidden"
           />
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+          <p className="text-sm text-secondary-text mt-2">
             {t("changeAvatar")}
           </p>
         </div>
@@ -171,7 +171,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
           )}
 
           <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-2">
+            <label htmlFor="name" className="block text-sm text-main-text font-medium mb-2">
               {t("name")}
             </label>
             <input
@@ -179,8 +179,8 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg
-                       bg-white dark:bg-zinc-800 text-foreground
+              className="w-full px-4 py-2 border border-border rounded-lg
+                       bg-bg-input text-secondary-text
                        focus:outline-none focus:ring-2 focus:ring-gray-500"
               placeholder={t("placeholderName")}
               maxLength={50}
@@ -188,7 +188,7 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
           </div>
 
           <div>
-            <label htmlFor="username" className="block text-sm font-medium mb-2">
+            <label htmlFor="username" className="block text-main-text text-sm font-medium mb-2">
               {t("username")}
             </label>
             <input 
@@ -196,34 +196,34 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg
-                       bg-white dark:bg-zinc-800 text-foreground
+              className="w-full px-4 py-2 border border-border rounded-lg
+                       bg-bg-input text-secondary-text
                        focus:outline-none focus:ring-2 focus:ring-gray-500"
               placeholder={t("placeholderUser")}
               maxLength={30}
             />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-xs text-secondary-text mt-1">
               {t("rules")}
             </p>
           </div>
 
           <div>
-            <label htmlFor="bio" className="block text-sm font-medium mb-2">
+            <label htmlFor="bio" className="block text-main-text text-sm font-medium mb-2">
               {t("bio")}
             </label>
             <textarea
               id="bio"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg
-                       bg-white dark:bg-zinc-800 text-foreground
+              className="w-full px-4 py-2 border border-border rounded-lg
+                       bg-bg-input text-secondary-text
                        focus:outline-none focus:ring-2 focus:ring-gray-500
                        resize-none"
               placeholder={t("placeholderBio")}
               rows={4}
               maxLength={160}
             />
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <p className="text-sm text-secondary-text mt-1">
               {bio?.length}/160
             </p>
           </div>
@@ -232,16 +232,16 @@ export default function EditProfile({ user, onClose }: EditProfileProps) {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-gray-300 dark:border-zinc-700 rounded-lg
-                       hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors"
+              className="flex-1 px-4 py-2 border border-border rounded-lg
+                       hover:bg-btn-hover transition-colors"
               disabled={isLoading}
             >
               {t("cancel")}
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-gray-500 text-white rounded-lg
-                       hover:bg-gray-300 hover:text-black transition-colors
+              className="flex-1 px-4 py-2 bg-btn-click border hover:border-border text-main-text rounded-lg
+                       hover:bg-btn-hover transition-colors
                        disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={isLoading || isUploadingAvatar}
             >

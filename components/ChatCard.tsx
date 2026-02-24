@@ -35,12 +35,12 @@ export default function ChatCard({ roomId, otherUser, lastMessage }: ChatCardPro
               {otherUser?.username?.[0]?.toUpperCase() ?? '?'}
             </div>
           )}
-          <h1 className="font-medium">@{otherUser?.username ?? t("unknown") }</h1>
+          <h1 className="font-medium text-main-text">@{otherUser?.username ?? t("unknown") }</h1>
         </div>
-        <p className="px-4 mx-2 mt-2 py-2 border border-zinc-700 rounded-xl text-sm text-zinc-300 truncate">
+        <p className="px-4 mx-2 mt-2 py-2 border border-border rounded-xl text-sm text-secondary-text truncate">
           {lastMessage?.content ?? t("messageZero")}
         </p>
-        <h2 className="flex flex-col items-end m-2 text-xs text-zinc-500">{time}</h2>
+        <h2 className="flex flex-col items-end m-2 text-xs text-secondary-text">{time}</h2>
       </div>
     </Link>
   )

@@ -10,13 +10,13 @@ export default function MessagesPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="flex flex-col items-center mb-5 text-xl font-semibold">
+      <h1 className="flex flex-col items-center mb-5 text-xl text-main-text font-semibold">
         {t("sms")}
       </h1>
       <div className="flex flex-col items-center gap-2">
-        {loading && <p className="text-zinc-400">{t("loading")}</p>}
+        {loading && <p className="text-secondary-text">{t("loading")}</p>}
         {!loading && chats.length === 0 && (
-          <p className="text-zinc-400">{t("withoutChat")}</p>
+          <p className="text-secondary-text">{t("withoutChat")}</p>
         )}
         {chats.map((chat) => (
           <ChatCard

@@ -8,7 +8,7 @@ export default async function SettingsPage() {
     return (
     <div className="max-w-3xl mx-auto my-8 space-y-8 text-main-text">
 
-      <h1 className="text-3xl font-bold">{t("setting")}</h1>
+      <h1 className="flex flex-row justify-center text-3xl font-bold">{t("setting")}</h1>
 
       <section className="bg-section p-6 rounded-xl space-y-4">
         <h2 className="text-lg font-semibold">{t("appearance")}</h2>
@@ -24,7 +24,7 @@ export default async function SettingsPage() {
 
         <div className="flex items-center justify-between">
           <span>{t("changePassword")}</span>
-          <button className="px-4 py-1 bg-zinc-800 rounded-lg">
+          <button className="px-4 py-2 bg-section-hover text-main-text rounded-lg">
             {t("update")}
           </button>
         </div>

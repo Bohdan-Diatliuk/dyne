@@ -49,7 +49,7 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
   return (
     <div className="flex flex-col h-screen max-w-4xl mx-auto">
       <div className="p-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mx-15 md:mx-0">
           {otherUser ? (
             <>
               {otherUser.avatar_url ? (
@@ -61,11 +61,11 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
                   className="rounded-full object-cover"
                 />
               ) : (
-                <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center text-sm font-bold">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold">
                   {otherUser.username?.[0]?.toUpperCase() || '?'}
                 </div>
               )}
-              <h1 className="text-xl font-bold">{otherUser.username}</h1>
+              <h1 className="text-xl text-main-text font-bold">{otherUser.username}</h1>
             </>
           ) : (
             <div className="flex items-center gap-3">
@@ -76,7 +76,7 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
         </div>
         <button
           onClick={() => router.push('/feed')}
-          className="px-4 py-2 text-sm text-black hover:text-white bg-gray-300 rounded hover:bg-gray-600 transition"
+          className="px-4 py-2 text-sm text-main-text bg-btn-click rounded hover:bg-btn-hover transition"
         >
           {t("exit")}
         </button>
@@ -85,11 +85,11 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
       <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 space-y-4">
         {loading ? (
           <div className="flex items-center justify-center h-full">
-            <div className="text-gray-500">{t("loading")}</div>
+            <div className="text-secondary-text">{t("loading")}</div>
           </div>
         ) : messages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
-            <div className="text-gray-500">{t("messageZero")}</div>
+            <div className="text-secondary-text">{t("messageZero")}</div>
           </div>
         ) : (
           messages.map((msg) => {
@@ -108,7 +108,7 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
                           height={42}
                         />
                       ) : (
-                        <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center text-sm">
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm">
                           {msg.sender?.username?.[0]?.toUpperCase() || '?'}
                         </div>
                       )}
@@ -118,8 +118,8 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
                   <div className="flex flex-col gap-1">
                     <div className={`px-4 py-2 rounded-lg ${
                       isOwn
-                        ? 'bg-gray-800 text-white rounded-br-none'
-                        : 'bg-gray-300 text-gray-900 rounded-bl-none shadow'
+                        ? 'bg-chat-own text-main-text rounded-br-none'
+                        : 'bg-chat-fr text-main-fr rounded-bl-none shadow'
                     }`}>
                       {!isOwn && (
                         <div className="text-xs font-semibold mb-1 opacity-70">
@@ -129,7 +129,7 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
 
                       {msg.reply_to && (
                         <div className={`text-xs mb-2 py-2 border-l-2 rounded-lg pl-2 ${
-                          isOwn ? 'border-gray-600 opacity-70' : 'border-gray-400 opacity-60'
+                          isOwn ? 'border-border opacity-70' : 'border-border opacity-60'
                         }`}>
                           <div className="font-semibold">
                             {msg.reply_to.sender?.username || t("unknown")} :
@@ -151,7 +151,7 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
 
                     <button
                       onClick={() => handleReply(msg)}
-                      className={`text-xs px-2 py-1 rounded hover:bg-gray-200 hover:text-black transition ${
+                      className={`text-xs text-secondary-text px-2 py-1 rounded hover:bg-btn-hover hover:text-main-text transition ${
                         isOwn ? 'self-end' : 'self-start'
                       }`}
                     >
@@ -168,16 +168,16 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
 
       <div className="p-4">
         {replyTo && (
-          <div className="mb-2 p-3 bg-gray-800 rounded-lg flex justify-between items-start">
+          <div className="mb-2 p-3 bg-section rounded-lg flex justify-between items-start">
             <div className="flex-1">
-              <div className="text-xs font-semibold text-gray-300 mb-1 pb-2 border-b border-gray-500">
+              <div className="text-xs font-semibold text-main-text mb-1 pb-2 border-b border-border">
                 {t("answerTo", { name: replyTo.sender?.username || t("unknown") })}
               </div>
-              <div className="text-md text-white truncate">
+              <div className="text-md text-main-text truncate">
                 {replyTo.content}
               </div>
             </div>
-            <button onClick={cancelReply} className="ml-2 text-white hover:text-gray-700">
+            <button onClick={cancelReply} className="ml-2 text-main-text hover:text-secondary-text">
               <X />
             </button>
           </div>
@@ -190,12 +190,12 @@ export default function MessPage({ params }: { params: Promise<{ chatId: string 
             onChange={(e) => setInput(e.target.value)}
             placeholder={replyTo ? t("answerTo", { name: replyTo.sender?.username }) : t("writeSms")}
             disabled={sending}
-            className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="flex-1 px-4 py-2 text-main-text border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
           <button
             type="submit"
             disabled={!input.trim() || sending}
-            className="px-6 py-2 bg-gray-600 text-white rounded-lg transition disabled:bg-gray-300 disabled:text-black disabled:cursor-not-allowed"
+            className="px-6 py-2 bg-btn-click text-main-text rounded-lg transition disabled:bg-btn-hover disabled:text-secondary-text disabled:cursor-not-allowed"
           >
             {sending ? t("sending") : t("send")}
           </button>

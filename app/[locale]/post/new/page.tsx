@@ -76,10 +76,10 @@ export default function PostNewPage() {
 
     return (
         <div className="flex flex-col items-center mt-30">
-            <h1 className="text-5xl font-bold mb-4 p-5">{t("header")}</h1>
+            <h1 className="text-5xl text-main-text font-bold mb-4 p-5">{t("header")}</h1>
 
             {username && (
-                <p className="w-full max-w-86 px-4 py-2 border border-gray-200 bg-gray-100 mb-4 rounded-md text-gray-500">
+                <p className="w-full max-w-86 px-4 py-2 border border-border bg-section mb-4 rounded-md text-secondary-text">
                     {username}
                 </p>
             )}
@@ -89,12 +89,12 @@ export default function PostNewPage() {
                 placeholder={t("post")}
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                className="w-full max-w-86 px-4 py-2 border border-gray-300 mb-4 rounded-md focus:shadow-xl focus:shadow-gray-600 transition-shadow duration-500"
+                className="w-full max-w-86 px-4 py-2 border text-main-text border-border mb-4 rounded-md focus:shadow-xl focus:shadow-gray-600 transition-shadow duration-500"
             />
             <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="px-4 py-2 w-full max-w-86 h-12 bg-gray-500 hover:bg-gray-400 transition-colors duration-300 text-xl text-white hover:text-black rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 w-full max-w-86 h-12 bg-btn-click hover:bg-btn-hover transition-colors duration-300 text-xl text-main-text rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 {isSubmitting ? '...' : t("send")}
             </button>

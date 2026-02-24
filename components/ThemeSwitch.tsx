@@ -37,10 +37,10 @@ export default function ThemeSwitch() {
 
   return (
     <Select value={theme} onValueChange={(val) => switchTheme(val as Theme)}>
-      <SelectTrigger className="w-36 bg-background text-foreground">
+      <SelectTrigger className="w-36 bg-background text-main-text">
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
-      <SelectContent className="bg-background text-foreground">
+      <SelectContent className="bg-background text-secondary-text">
         {themes.map((t) => (
           <SelectItem key={t} value={t}>
             {themeLabels[t]}
