@@ -44,6 +44,7 @@
         "loading": "Loading...",
         "withoutChat": "No chats",
         "writeSms": "Write a message...",
+        "write": "Write",
         "send": "Send",
         "exit": "Exit"
     },

@@ -9,13 +9,15 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-const themes = ["dark", "theme-ocean", "theme-sunset"] as const
+const themes = ["dark", "theme-light","theme-ocean", "theme-sunset", "theme-forest"] as const
 type Theme = typeof themes[number]
 
 const themeLabels: Record<Theme, string> = {
   "dark": "Dark",
+  "theme-light": "Light",
   "theme-ocean": "Ocean",
   "theme-sunset": "Sunset",
+  "theme-forest": "Forest",
 }
 
 export default function ThemeSwitch() {
@@ -23,6 +25,7 @@ export default function ThemeSwitch() {
 
   useEffect(() => {
     const saved = (localStorage.getItem("theme") as Theme) ?? "dark"
+    document.documentElement.classList.remove(...themes)
     document.documentElement.classList.add(saved)
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(saved)
@@ -37,10 +40,10 @@ export default function ThemeSwitch() {
 
   return (
     <Select value={theme} onValueChange={(val) => switchTheme(val as Theme)}>
-      <SelectTrigger className="w-36 bg-background text-foreground">
+      <SelectTrigger className="w-36 bg-background text-main-text">
         <SelectValue placeholder="Theme" />
       </SelectTrigger>
-      <SelectContent className="bg-background text-foreground">
+      <SelectContent className="bg-background text-secondary-text">
         {themes.map((t) => (
           <SelectItem key={t} value={t}>
             {themeLabels[t]}

@@ -33,18 +33,18 @@ export default async function Home() {
   }
 
   return (
-    <div className="relative flex justify-center items-center h-screen">
+    <div className="relative flex justify-center bg-background/10 items-center h-screen">
       <MainEffect />
       
       <div className="flex flex-col items-center justify-center gap-8 z-10">
-        <p className="text-6xl font-bold">DYNE</p>
+        <p className="text-6xl text-main-text font-bold">DYNE</p>
         
         {user ? (
           <>
-            <h1 className="text-3xl font-bold">{t("welcome", { name: user.user_metadata.full_name})}</h1>
+            <h1 className="text-3xl text-main-text font-bold">{t("welcome", { name: user.user_metadata.full_name})}</h1>
             <div className="flex gap-4">
               <form action="/feed">
-                <button className="rounded-lg bg-gray-600 px-6 py-3 text-white hover:bg-gray-700 transition-colors">
+                <button className="rounded-lg bg-btn-click px-6 py-3 text-main-text hover:bg-btn-hover transition-colors">
                   {t("continue")}
                 </button>
               </form>
@@ -53,7 +53,7 @@ export default async function Home() {
           </>
         ) : (
           <>
-            <h1 className="text-3xl font-bold">{t("welcomeGuest")}</h1>
+            <h1 className="text-3xl text-main-text font-bold">{t("welcomeGuest")}</h1>
             <SignInButton />
           </>
         )}

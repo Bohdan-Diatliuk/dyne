@@ -93,12 +93,12 @@ export default function Sidebar() {
     setSearchResults([]);
   };
 
-  const baseClasses = `flex items-center p-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-zinc-900 transition-colors duration-200 relative`;
+  const baseClasses = `flex items-center p-3 rounded-2xl hover:bg-section transition-colors duration-200 relative`;
 
   return (
     <>
       <div
-        className={`h-screen fixed top-0 left-0 z-30 text-main-text transition-all duration-300 hidden md:block ${isSidebarOpen ? "w-36" : "w-20"}`}
+        className={`h-screen fixed top-0 left-0 z-30 w-auto text-main-text transition-all duration-300 hidden md:block ${isSidebarOpen ? "w-36" : "w-20"}`}
         onMouseEnter={() => setIsSidebarOpen(true)}
         onMouseLeave={() => setIsSidebarOpen(false)}
       >
@@ -144,7 +144,7 @@ export default function Sidebar() {
       {isMobileMenuOpen && (
         <>
           <div
-            className="md:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+            className="md:hidden fixed inset-0 z-40 bg-background/50 backdrop-blur-sm"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
@@ -152,20 +152,20 @@ export default function Sidebar() {
             <div className="flex items-center justify-between px-4 py-6">
               <Link
                 href="/"
-                className="text-xl font-bold uppercase"
+                className="text-xl text-main-text font-bold uppercase"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Dyne
               </Link>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="p-2 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-900"
+                className="p-2 rounded-xl text-main-text hover:text-section"
               >
                 <X size={22} />
               </button>
             </div>
 
-            <nav className="flex flex-col gap-2 px-2">
+            <nav className="flex flex-col gap-2 text-main-text px-2">
               {menuItems.map((item) => {
                 const Icon = item.icon;
                 if (item.href) {

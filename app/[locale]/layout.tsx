@@ -17,6 +17,15 @@ export const metadata: Metadata = {
   },
 }
 
+const theme = `
+  (function() {
+    try {
+      var theme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('class', theme);
+    } catch (error) {} 
+  })()
+`
+
 export default async function RootLayout({
   children,
   params,
@@ -28,7 +37,10 @@ export default async function RootLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} className="dark">
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: theme }}></script>
+      </head>
       <body className={`${oswald.className} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           {children}

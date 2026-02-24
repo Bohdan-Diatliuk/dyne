@@ -49,11 +49,18 @@
   --color-section: var(--section);
   --color-section-hover: var(--section-hover);
   --color-main-text: var(--main-text);
+  --color-main-fr: var(--main-fr);
   --color-secondary-text: var(--secondary-text);
-  --color-sms-back: var(--sms-back);
-  --color-sms-backTo: var(--sms-backTo);
   --color-btn-click: var(--btn-click);
   --color-btn-hover: var(--btn-hover); 
+  --color-border: var(--border);
+  --color-bg-input: var(--bg-input);
+  --color-btn-follow: var(--btn-follow);
+  --color-btn-unfollow: var(--btn-unfollow);
+  --color-btn-unfollow-h: var(--btn-unfollow-h);
+  --color-chat-own: var(--chat-own);
+  --color-chat-fr: var(--chat-fr);
+  --color-particle: var(--particle);
 }
 
 ::-webkit-scrollbar {
@@ -131,13 +138,42 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 
   --section: #18181b;
-  --section-hover: ;
+  --section-hover: #070707;
   --main-text: #fff;
-  --secondary-text:
-  --sms-back:
-  --sms-backTo:
-  --btn-click:
-  --btn-hover:
+  --main-fr: #000000;
+  --secondary-text: #727f82;
+  --btn-click: #232230;
+  --btn-hover: #6e6e75;
+  --btn-follow: #242432;
+  --btn-unfollow: #1f1f27;
+  --btn-unfollow-h: #7d4440;
+  --bg-input: #131317;
+  --border: oklch(57.262% 0.01527 285.853);
+  --chat-own: #07070a;
+  --chat-fr: #67676e;
+  --particle: ;
+}
+
+.theme-light {
+  --background: #fff;
+  --foreground: oklch(15.434% 0.00002 271.152);
+  --primary: oklch(59.072% 0.02794 229.567);
+
+  --section: #c2c2c2;
+  --section-hover: #e3e4e4;
+  --main-text: #2b2b2b;
+  --main-fr: #111;
+  --secondary-text: #7c7f82;
+  --btn-click: #b0b0b1;
+  --btn-hover: rgb(210, 217, 232);
+  --btn-follow: #d5cfc8d1;
+  --btn-unfollow: #d0c7c3;
+  --btn-unfollow-h: rgb(248, 239, 231);
+  --border: #afafb0; 
+  --bg-input: #dadae595;
+  --chat-own: #dcdfe6;
+  --chat-fr: rgb(252, 252, 252);
+  --particle: #111;
 }
 
 .theme-ocean {
@@ -148,26 +184,62 @@
   --section: #161e32;
   --section-hover: #0d142a;
   --main-text: #E2E8F0;
+  --main-fr: #111;
   --secondary-text: #7c7f82;
-  --sms-back:
-  --sms-backTo:
-  --btn-click:
-  --btn-hover:
+  --btn-click: #425176;
+  --btn-hover: rgb(35, 46, 71);
+  --btn-follow: #668be8;
+  --btn-unfollow: #293861;
+  --btn-unfollow-h: rgb(72, 60, 200);
+  --border: #3f3f62; 
+  --bg-input: #2b2b5f95;
+  --chat-own: #485983;
+  --chat-fr: rgb(180, 180, 234);
+  --particle: #fff;
 }
 
 .theme-sunset {
-  --background: #312E81;
+  --background: #b5590e;
   --foreground: oklch(0.95 0.01 20);
   --primary: oklch(0.7 0.25 30);
 
-  --section: #312E81;
-  --section-hover: ;
-  --main-text: #F8FAFC;
-  --secondary-text:
-  --sms-back:
-  --sms-backTo:
-  --btn-click:
-  --btn-hover: 
+  --section: #956b2c;
+  --section-hover: rgb(131, 84, 12);
+  --main-text: rgb(0, 0, 0);
+  --main-fr: #000000;
+  --secondary-text: #3f3932;
+  --btn-click: #d88525;
+  --btn-hover: #76490b;
+  --btn-follow: #d19a10;
+  --btn-unfollow: #e19315;
+  --btn-unfollow-h: #f58d25;
+  --border: #6e3602;
+  --bg-input: #986a20;
+  --chat-own: #ac6f2a;
+  --chat-fr: #db9d56;
+  --particle: #111;
+}
+
+.theme-forest {
+  --background: #075513;
+  --foreground: oklch(100% 0.00011 271.152);
+  --primary: oklch(0.7 0.25 30);
+
+  --section: #07622a;
+  --section-hover: rgb(5, 124, 17);
+  --main-text: rgb(255, 255, 255);
+  --main-fr: #000000;
+  --secondary-text: #aabda5;
+  --btn-click: #1fc210;
+  --btn-hover: #23940d;
+  --btn-follow: #5cc411;
+  --btn-unfollow: #589e0e;
+  --btn-unfollow-h: #11810f;
+  --border: #008000;
+  --bg-input: #3f922b;
+  --chat-own: #00af20f3;
+  --chat-fr: #32ff7a;
+  --particle: ;
 }
 
 @layer base {

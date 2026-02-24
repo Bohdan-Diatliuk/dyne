@@ -13,7 +13,7 @@ export default function EditProfileBtn({ user }: EditUserProps) {
         <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="px-4 py-2 bg-gray-200 dark:bg-zinc-800 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-zinc-700 transition-colors"
+                className="px-4 py-2 bg-btn-click text-main-text rounded-lg hover:bg-btn-hover transition-colors"
             >
                 {t("edit")}
             </button>

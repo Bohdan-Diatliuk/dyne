@@ -67,19 +67,19 @@ export default function ProfileStats({
   }, [userId]);
 
   return (
-    <div className="mt-6 pt-6 border-t border-gray-200 dark:border-zinc-800">
+    <div className="mt-6 pt-6 border-t border-border">
       <div className="grid grid-cols-3 gap-4 text-center">
         <div>
-          <p className="text-2xl font-bold">0</p>
-          <p className="text-gray-500 dark:text-gray-400">{t("post")}</p>
+          <p className="text-2xl text-main-text font-bold">0</p>
+          <p className="text-secondary-text">{t("post")}</p>
         </div>
         <div>
-          <p className="text-2xl font-bold">{followersCount}</p>
-          <p className="text-gray-500 dark:text-gray-400">{t("followers")}</p>
+          <p className="text-2xl text-main-text font-bold">{followersCount}</p>
+          <p className="text-secondary-text">{t("followers")}</p>
         </div>
         <div>
-          <p className="text-2xl font-bold">{followingCount}</p>
-          <p className="text-gray-500 dark:text-gray-400">{t("following")}</p>
+          <p className="text-2xl text-main-text font-bold">{followingCount}</p>
+          <p className="text-secondary-text">{t("following")}</p>
         </div>
       </div>
     </div>

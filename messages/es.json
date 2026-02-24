@@ -39,6 +39,8 @@
         "unknown": "Desconocido",
         "answer": "Responder",
         "answerTo":"Responder a {name}",
+        "writeSms": "Escribir un mensaje...",
+        "write": "Escribir",
         "sending": "Enviando...",
         "loading": "Cargando...",
         "withoutChat": "No hay chats",

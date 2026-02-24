@@ -65,8 +65,8 @@ export default async function ProfilePage({
                         <Image
                             src={user.avatar_url}
                             alt={user.name || 'User'}
-                            width={120}
-                            height={120}
+                            width={100}
+                            height={100}
                             className="rounded-full object-cover"
                         />
                     ) : (
@@ -76,11 +76,11 @@ export default async function ProfilePage({
                     )}
 
                     <div className="flex-1">
-                        <h1 className="text-3xl font-bold mb-2">{user.name}</h1>
-                        <p className="text-gray-500 dark:text-gray-400 mb-2">@{user.username}</p>
+                        <h1 className="text-3xl text-main-text font-bold mb-2">{user.name}</h1>
+                        <p className="text-secondary-text mb-2">@{user.username}</p>
                         
                         {user.bio && (
-                            <p className="text-gray-700 dark:text-gray-300 mb-4">
+                            <p className="text-secondary-text mb-4">
                                 {user.bio}
                             </p>
                         )}
@@ -113,8 +113,8 @@ export default async function ProfilePage({
             </div>
 
             <div className="bg-section rounded-lg shadow-lg p-8">
-                <h2 className="text-xl font-bold mb-4">{t("post")}</h2>
-                <div className="text-center text-gray-500 dark:text-gray-400 py-12">
+                <h2 className="text-xl text-main-text font-bold mb-4">{t("post")}</h2>
+                <div className="text-center text-secondary-text py-12">
                     {t("postCount")}
                 </div>
             </div>

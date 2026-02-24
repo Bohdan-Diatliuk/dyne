@@ -23,10 +23,10 @@ export default function LanguageSelect() {
   return (
     <div className="flex items-center justify-between">
       <Select value={locale} onValueChange={switchLocale}>
-        <SelectTrigger className="w-45 bg-background">
+        <SelectTrigger className="w-45 bg-background text-main-text">
           <SelectValue placeholder="Select language" />
         </SelectTrigger>
-        <SelectContent className="bg-background">
+        <SelectContent className="bg-background text-secondary-text">
           <SelectItem value="uk">Ukrainian</SelectItem>
           <SelectItem value="en">English</SelectItem>
           <SelectItem value="cn">Chinese</SelectItem>

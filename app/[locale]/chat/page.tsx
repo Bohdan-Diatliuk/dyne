@@ -98,14 +98,14 @@ export default function ChatPage() {
     <div className="flex flex-col h-screen max-w-4xl mx-auto">
       <div className="p-4 flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold">{t("global")}</h1>
-          <p className="text-sm text-gray-400">
+          <h1 className="text-xl text-main-text font-bold">{t("global")}</h1>
+          <p className="text-sm text-secondary-text">
             {t("sign", { name: user.user_metadata.full_name || user.email })}
           </p>
         </div>
         <button
           onClick={handleBack}
-          className="px-4 py-2 items-end text-sm text-black hover:text-white bg-gray-300 rounded hover:bg-gray-600 transition"
+          className="px-4 py-2 items-end text-sm text-main-text bg-btn-click rounded hover:bg-btn-hover transition"
         >
           {t("exit")}
         </button>
@@ -117,11 +117,11 @@ export default function ChatPage() {
       >
         {messagesLoading ? (
           <div className="flex items-center justify-center h-full">
-            <div className="text-gray-500">{t("messageLoading")}</div>
+            <div className="text-secondary-text">{t("messageLoading")}</div>
           </div>
         ) : messages.length === 0 ? (
           <div className="flex items-center justify-center h-full">
-            <div className="text-gray-500">
+            <div className="text-secondary-text">
               {t("messageZero")}
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function ChatPage() {
                           height={42}
                         />
                       ) : (
-                        <div className="w-8 h-8 rounded-full bg-gray-300 dark:bg-zinc-700 flex items-center justify-center text-sm">
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm">
                           {message.users?.name?.[0]?.toUpperCase() || '?'}
                         </div>
                       )}
@@ -157,8 +157,8 @@ export default function ChatPage() {
                     <div
                       className={`px-4 py-2 rounded-lg ${
                         isOwn
-                          ? 'bg-gray-800 text-white rounded-br-none'
-                          : 'bg-gray-300 text-gray-900 rounded-bl-none shadow'
+                          ? 'bg-chat-own text-main-text rounded-br-none'
+                          : 'bg-chat-fr text-main-fr rounded-bl-none shadow'
                       }`}
                     >
                       {!isOwn && (
@@ -169,7 +169,7 @@ export default function ChatPage() {
                       
                       {message.reply_to && (
                         <div className={`text-xs mb-2 py-2 border-l-2 rounded-lg pl-2 ${
-                            isOwn ? 'border-gray-600 opacity-70' : 'border-gray-400 opacity-60'
+                            isOwn ? 'border-border opacity-70' : 'border-border opacity-60'
                           }`}>
                           <div className="font-semibold">
                             {message.reply_to.users?.name || t("unknown")} :
@@ -210,18 +210,18 @@ export default function ChatPage() {
 
       <div className="p-4">
         {replyTo && (
-          <div className="mb-2 p-3 bg-gray-800 rounded-lg flex justify-between items-start">
+          <div className="mb-2 p-3 rounded-lg bg-section flex justify-between items-start">
             <div className="flex-1">
-              <div className="text-xs font-semibold text-gray-300 mb-1 pb-2 border-b border-gray-500">
+              <div className="text-xs font-semibold text-main-text mb-1 pb-2 border-b border-border">
                   {t("answerTo", { name: replyTo.users?.name || t("unknown")})}
               </div>
-              <div className="text-md text-white truncate">
+              <div className="text-md text-main-text truncate">
                 {replyTo.content}
               </div>
             </div>
             <button
               onClick={cancelReply}
-              className="ml-2 text-white hover:text-gray-700"
+              className="ml-2 text-main-text hover:text-secondary-text"
             >
               <X />
             </button>
@@ -235,12 +235,12 @@ export default function ChatPage() {
             onChange={(e) => setInput(e.target.value)}
             placeholder={replyTo ? t("answerTo", { name: replyTo.users?.name}) : t("enterMessage")}
             disabled={sending}
-            className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="flex-1 px-4 py-2 text-main-text  border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
           <button
             type="submit"
             disabled={!input.trim() || sending}
-            className="px-6 py-2 bg-gray-600 text-white rounded-lg transition disabled:bg-gray-300 disabled:text-black disabled:cursor-not-allowed"
+            className="px-6 py-2 bg-btn-click text-main-text rounded-lg transition disabled:bg-btn-hover disabled:text-secondary-text disabled:cursor-not-allowed"
           >
             {sending ? t("sending") : t("send")}
           </button>
