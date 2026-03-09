@@ -2,14 +2,14 @@ import { PostCardProps } from "@/types/post.interface";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function PostCard({ createdAt, author, authorName, content, avatarUrl }: PostCardProps) {
+export default function PostCard({ createdAt, author, authorName, content, avatarUrl, className }: PostCardProps) {
     const date = new Date(createdAt).toLocaleDateString('uk-UA', {
         hour: '2-digit',
         minute: '2-digit',
     });
 
     return (
-        <div className="w-full max-w-lg">
+        <div className={className}>
             <div className="bg-section w-full min-w-0 rounded-xl p-2 hover:bg-section-hover transition-colors">
                 <div className="flex items-center gap-3 px-4 pt-3">
                     {avatarUrl ? (

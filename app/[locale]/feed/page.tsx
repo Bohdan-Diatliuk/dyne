@@ -57,6 +57,7 @@ export default async function FeedPage() {
         ) : (
           posts.map((post) => (
             <PostCard
+              className="w-full max-w-lg"
               key={post.id}
               id={post.id}
               content={post.content}

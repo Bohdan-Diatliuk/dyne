@@ -17,4 +17,5 @@ export interface PostCardProps {
   author: string;
   authorName: string;
   avatarUrl?: string | null;
+  className?: string;
 }

@@ -18,12 +18,14 @@ export default function MessageButton({ otherUserId }: { otherUserId: string }) 
   };
 
   return (
-    <button
-      onClick={handleClick}
-      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-btn-click hover:bg-btn-hover text-main-text font-medium transition-colors"
-    >
-      <MessageCircle size={16} />
-      {t("write")}
-    </button>
+    <div className="flex items-center mt-2 md:mt-0">
+      <button
+        onClick={handleClick}
+        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-btn-click hover:bg-btn-hover text-main-text font-medium transition-colors"
+        >
+        <MessageCircle size={18} />
+        {t("write")}
+      </button>
+    </div>
   );
 }
