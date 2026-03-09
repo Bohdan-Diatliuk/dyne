@@ -38,18 +38,18 @@ Dyne — is a modern social platform built with Next.js that brings people toget
 
 ## Architecture
 
-The project follows a modular structure using Next.js App Router, organized to separate concerns and make the codebase scalable and maintable.
+The project follows a modular structure using Next.js App Router, organized to separate concerns and make the codebase scalable and maintainable.
 
 ### Project Structure
 
 ```
-app/[locale]        # Pages and layouts, locale-specifix routing
+app/[locale]        # Pages and layouts, locale-specific routing
 components/         # Reusable UI components (shadcn/ui, Radix, Tailwind)
 hooks/              # Custom React hooks for state and logic 
 i18n/               # Internationalization setup (next-intl)
 lib/                # Supabase client and utility functions
 messages/           # Localization message files
-public/             # Static assets (icon)
+public/             # Static asset (icon)
 types/              # TypeScript types
 next.config.ts      # Next.js configuration
 proxy.ts            # API proxy / middleware
