@@ -35,7 +35,6 @@ export function usePrivateChat(otherUserId: string) {
     if (!roomId) return
 
     const loadMessages = async () => {
-      // Без join — тільки чисті поля таблиці
       const { data, error } = await supabase
         .from('private_messages')
         .select('*')
